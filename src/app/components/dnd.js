@@ -254,6 +254,23 @@ const formatDate = (isoDate) => {
   return `${day}.${month}.${year}`;
 };
 
+const getFlagColor = (flagId) => {
+  switch (flagId) {
+    case 1:
+      return "red";
+    case 2:
+      return "orange";
+    case 3:
+      return "yellow";
+    case 4:
+      return "green";
+    case 5:
+      return "blue";
+    default:
+      return "gray";
+  }
+};
+
 const Card = ({
   description,
   id,
@@ -262,9 +279,11 @@ const Card = ({
   title,
   startDate,
   endDate,
+  flag,
 }) => {
   const formattedStartDate = startDate ? formatDate(startDate) : "";
   const formattedEndDate = endDate ? formatDate(endDate) : "";
+  const flagColor = getFlagColor(flag);
   return (
     <>
       <DropIndicator beforeId={id} column={column} />
@@ -286,7 +305,7 @@ const Card = ({
         <div className="text-[#98A2B3] flex flex-row items-center text-xs">
           <LuDiamond />
           <span className="ps-1 pe-3">Milestone Name</span>
-          <FaFlag color="red" />
+          <FaFlag color={flagColor} />
         </div>
       </motion.div>
     </>
@@ -376,10 +395,10 @@ const AddColumn = ({ addColumn }) => {
     return (
       <button
         onClick={() => setAdding(true)}
-        className="flex items-center gap-2 text-[#98A2B3] hover:text-black"
+        className="flex items-center justify-center text-xl flex-col gap-2 w-80 shrink-0 border rounded-t-lg rounded-b-lg bg-white px-1 text-[#98A2B3]"
       >
         <FiPlus />
-        Add Column
+        Add Board
       </button>
     );
   }
