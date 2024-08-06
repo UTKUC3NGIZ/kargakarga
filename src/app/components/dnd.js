@@ -22,7 +22,8 @@ const DEFAULT_CARDS = [
 
   // DOING
   {
-    title: "Refactor context providers to use Zustand",
+    title:
+      "Research DB options for new microserviceResearch DB options for new microserviceResearch DB options for new microserviceResearch DB options for new microservice",
     id: "8",
     column: "doing",
   },
@@ -190,10 +191,10 @@ const Column = ({ title, cards, column, setCards }) => {
           </div>
         </div>
         <div className="flex gap-3 flex-row">
-          <button className="text-[#98A2B3]">
+          <button className="text-[#98A2B3] hover:text-black">
             <FiPlus />
           </button>
-          <button className="text-[#98A2B3] rounded-full border border-[#98A2B3]">
+          <button className="text-[#98A2B3] rounded-full border border-[#98A2B3] hover:text-black">
             <HiOutlineDotsHorizontal />
           </button>
         </div>
@@ -203,7 +204,7 @@ const Column = ({ title, cards, column, setCards }) => {
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         className={`h-[500px] w-full transition-colors overflow-y-auto overflow-x-hidden  ${
-          active ? "bg-neutral-800/50" : "bg-neutral-800/0"
+          active ? "bg-white opacity-80" : "bg-white"
         }`}
       >
         {filteredCards.map((c) => {
@@ -271,18 +272,18 @@ const AddCard = ({ column, setCards }) => {
             onChange={(e) => setText(e.target.value)}
             autoFocus
             placeholder="Add new task..."
-            className="w-full rounded border border-violet-400 bg-violet-400/20 p-3 text-sm text-neutral-50 placeholder-violet-300 focus:outline-0"
+            className="w-full rounded border border-[violet-400] bg-white p-3 text-sm  placeholder-[#4E5BA6] focus:outline-0 text-[#4E5BA6]  "
           />
           <div className="mt-1.5 flex items-center justify-end gap-1.5">
             <button
               onClick={() => setAdding(false)}
-              className="px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:text-neutral-50"
+              className="px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:text-black"
             >
               Close
             </button>
             <button
               type="submit"
-              className="flex items-center gap-1.5 rounded bg-neutral-50 px-3 py-1.5 text-xs text-neutral-950 transition-colors hover:bg-neutral-300"
+              className="flex items-center gap-1.5 rounded bg-neutral-50 px-3 py-1.5 text-xs text-neutral-950 transition-colors hover:bg-[#4E5BA6] hover:text-white"
             >
               <span>Add</span>
               <FiPlus />
@@ -293,7 +294,7 @@ const AddCard = ({ column, setCards }) => {
         <motion.button
           layout
           onClick={() => setAdding(true)}
-          className="flex w-full items-center gap-1.5 px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:text-neutral-50"
+          className="flex w-full items-center gap-1.5 px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:text-black"
         >
           <span>Add card</span>
           <FiPlus />
