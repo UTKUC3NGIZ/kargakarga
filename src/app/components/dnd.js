@@ -1,7 +1,46 @@
 "use client";
 import React, { useState } from "react";
 import { FiPlus, FiTrash } from "react-icons/fi";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { motion } from "framer-motion";
+
+const DEFAULT_CARDS = [
+  // TODO
+  {
+    title: "Research DB options for new microservice",
+    id: "5",
+    column: "todo",
+  },
+  {
+    title:
+      "Research DB options for new microserviceResearch DB options for new microserviceResearch DB options for new microserviceResearch DB options for new microservice",
+    id: "8",
+    column: "todo",
+  },
+  { title: "Postmortem for outage", id: "6", column: "todo" },
+  { title: "Sync with product on Q3 roadmap", id: "7", column: "todo" },
+
+  // DOING
+  {
+    title: "Refactor context providers to use Zustand",
+    id: "8",
+    column: "doing",
+  },
+  { title: "Add logging to daily CRON", id: "9", column: "doing" },
+  // DONE
+  {
+    title: "Set up DD dashboards for Lambda listener",
+    id: "10",
+    column: "done",
+  },
+];
+
+const DEFAULT_COLUMNS = [
+  { title: "TODO", column: "todo" },
+  { title: "In progress", column: "doing" },
+  { title: "Complete", column: "done" },
+  { title: "Deneme", column: "deneme" },
+];
 
 export default function Dnd() {
   return (
@@ -19,7 +58,6 @@ const Board = () => {
     const newColumn = {
       title,
       column: title.toLowerCase().replace(/\s+/g, ""),
-      headingColor: "text-neutral-500",
     };
     setColumns((prev) => [...prev, newColumn]);
   };
@@ -31,7 +69,6 @@ const Board = () => {
           key={col.column}
           title={col.title}
           column={col.column}
-          headingColor={col.headingColor}
           cards={cards}
           setCards={setCards}
         />
@@ -41,7 +78,7 @@ const Board = () => {
   );
 };
 
-const Column = ({ title, headingColor, cards, column, setCards }) => {
+const Column = ({ title, cards, column, setCards }) => {
   const [active, setActive] = useState(false);
 
   const handleDragStart = (e, card) => {
@@ -144,12 +181,22 @@ const Column = ({ title, headingColor, cards, column, setCards }) => {
   const filteredCards = cards.filter((c) => c.column === column);
 
   return (
-    <div className="w-56 shrink-0 border rounded-t-lg rounded-b-lg bg-white px-1">
+    <div className="w-80 shrink-0 border rounded-t-lg rounded-b-lg bg-white px-1">
       <div className="mb-3 flex items-center justify-between px-4 py-5 ">
-        <h3 className={`font-medium ${headingColor}`}>{title}</h3>
-        <span className="rounded text-sm text-neutral-400">
-          {filteredCards.length}
-        </span>
+        <div className="flex flex-row gap-2 text-center justify-center items-center ">
+          <h3 className={`text-[#4E5BA6] text-base font-normal`}>{title}</h3>
+          <div className="w-5 h-5 text-[#175CD3] border-[#B2DDFF] bg-[#eff7fe] rounded-full border   text-xs flex items-center justify-center">
+            <span>{filteredCards.length}</span>
+          </div>
+        </div>
+        <div className="flex gap-3 flex-row">
+          <button className="text-[#98A2B3]">
+            <FiPlus />
+          </button>
+          <button className="text-[#98A2B3] rounded-full border border-[#98A2B3]">
+            <HiOutlineDotsHorizontal />
+          </button>
+        </div>
       </div>
       <div
         onDrop={handleDragEnd}
@@ -178,7 +225,7 @@ const Card = ({ title, id, column, handleDragStart }) => {
         layoutId={id}
         draggable="true"
         onDragStart={(e) => handleDragStart(e, { title, id, column })}
-        className="cursor-grab rounded border border-white-700 bg-white-800 p-3 active:cursor-grabbing"
+        className="cursor-grab rounded h-auto border border-white-700 bg-white-800 p-3 active:cursor-grabbing"
       >
         <p className="text-sm text-[#475467]">{title}</p>
       </motion.div>
@@ -302,49 +349,12 @@ const AddColumn = ({ addColumn }) => {
         <motion.button
           layout
           onClick={() => setAdding(true)}
-          className="flex w-full items-center gap-1.5 px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:text-neutral-50"
+          className="flex flex-col items-center gap-1.5 py-1.5 font-medium text-xl text-neutral-400 transition-colors hover:text-gray-500 w-80 shrink-0 border rounded-t-lg rounded-b-lg bg-white px-1 justify-center"
         >
-          <span>Add column</span>
-          <FiPlus />
+          <FiPlus size={"24px"} />
+          <span>Add Board</span>
         </motion.button>
       )}
     </>
   );
 };
-
-const DEFAULT_CARDS = [
-  // BACKLOG
-  { title: "Look into render bug in dashboard", id: "1", column: "backlog" },
-  { title: "SOX compliance checklist", id: "2", column: "backlog" },
-  { title: "[SPIKE] Migrate to Azure", id: "3", column: "backlog" },
-  { title: "Document Notifications service", id: "4", column: "backlog" },
-  // TODO
-  {
-    title: "Research DB options for new microservice",
-    id: "5",
-    column: "todo",
-  },
-  { title: "Postmortem for outage", id: "6", column: "todo" },
-  { title: "Sync with product on Q3 roadmap", id: "7", column: "todo" },
-
-  // DOING
-  {
-    title: "Refactor context providers to use Zustand",
-    id: "8",
-    column: "doing",
-  },
-  { title: "Add logging to daily CRON", id: "9", column: "doing" },
-  // DONE
-  {
-    title: "Set up DD dashboards for Lambda listener",
-    id: "10",
-    column: "done",
-  },
-];
-
-const DEFAULT_COLUMNS = [
-  { title: "Backlog", column: "backlog", headingColor: "text-neutral-500" },
-  { title: "TODO", column: "todo", headingColor: "text-yellow-200" },
-  { title: "In progress", column: "doing", headingColor: "text-blue-200" },
-  { title: "Complete", column: "done", headingColor: "text-emerald-200" },
-];
