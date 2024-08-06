@@ -1,7 +1,58 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
+  const router = useRouter();
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const combinedData = {
+      fullName: `${formData.firstName} ${formData.lastName}`,
+      email: formData.email,
+      password: formData.password,
+    };
+
+    try {
+      const response = await axios.post(
+        "https://api.management.parse25proje.link/api/auth/register",
+        combinedData
+      );
+
+      if (response.data.status) {
+        toast.success(response.data.messages || "Hesap başarıyla oluşturuldu.");
+        router.push("/login");
+      } else {
+        toast.error(response.data.messages || "Bir hata oluştu.");
+      }
+    } catch (error) {
+      toast.error(
+        error.response && error.response.data && error.response.data.messages
+          ? error.response.data.messages
+          : "Bir hata oluştu."
+      );
+    }
+  };
+
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -21,7 +72,7 @@ export default function Page() {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
           <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-            <form action="#" method="POST" className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label
                   htmlFor="firstName"
@@ -37,6 +88,7 @@ export default function Page() {
                     required
                     autoComplete="given-name"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -53,8 +105,9 @@ export default function Page() {
                     name="lastName"
                     type="text"
                     required
-                    autocomplete="family-name"
+                    autoComplete="family-name"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -73,6 +126,7 @@ export default function Page() {
                     required
                     autoComplete="email"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -91,10 +145,10 @@ export default function Page() {
                     required
                     autoComplete="current-password"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={handleChange}
                   />
                 </div>
               </div>
-
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <input
@@ -111,7 +165,6 @@ export default function Page() {
                   </label>
                 </div>
               </div>
-
               <div>
                 <button
                   type="submit"
