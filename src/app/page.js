@@ -14,9 +14,43 @@ const navigation = [
     icon: UsersIcon,
     current: false,
     children: [
-      { name: "Engineering", href: "#" },
-      { name: "Human Resources", href: "#" },
-      { name: "Customer Success", href: "#" },
+      { name: "Overview", href: "#" },
+      { name: "Notifications", href: "#" },
+      { name: "Analytics", href: "#" },
+      { name: "Reports", href: "#" },
+    ],
+  },
+  {
+    name: "Proje İsmi 2",
+    icon: UsersIcon,
+    current: false,
+    children: [
+      { name: "Overview", href: "#" },
+      { name: "Notifications", href: "#" },
+      { name: "Analytics", href: "#" },
+      { name: "Reports", href: "#" },
+    ],
+  },
+  {
+    name: "Proje İsmi 3",
+    icon: UsersIcon,
+    current: false,
+    children: [
+      { name: "Overview", href: "#" },
+      { name: "Notifications", href: "#" },
+      { name: "Analytics", href: "#" },
+      { name: "Reports", href: "#" },
+    ],
+  },
+  {
+    name: "Proje İsmi 4",
+    icon: UsersIcon,
+    current: false,
+    children: [
+      { name: "Overview", href: "#" },
+      { name: "Notifications", href: "#" },
+      { name: "Analytics", href: "#" },
+      { name: "Reports", href: "#" },
     ],
   },
 ];
@@ -607,7 +641,7 @@ export default function Home() {
             </div>
           </ul>
         </div>
-        <nav className="overflow-y-auto py-5 px-3 w-64 h-full bg-white border-r border-gray-200 transition-transform left-0 top-0 transform-none">
+        <nav className="overflow-y-auto py-5 px-4 w-64 h-full bg-white border-r border-gray-200 transition-transform left-0 top-0 transform-none">
           <ul role="list" className="flex flex-1 flex-col gap-y-7 h-full">
             <li>
               <h2 className="text-base font-medium py-4">Projeler</h2>
@@ -669,16 +703,31 @@ export default function Home() {
                     )}
                   </li>
                 ))}
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-x-1.5 rounded-md px-2.5 py-1.5 text-sm font-normal text-[#98A2B3] hover:text-[#8f9cb3]  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
+                >
+                  <Image
+                    src="/assets/img/wave.svg"
+                    width={24}
+                    height={24}
+                    alt="Picture of the author"
+                  />
+                  Proje Oluştur
+                </button>
               </ul>
             </li>
             <li className="-mx-6 mt-auto">
-              <div className="flex items-center gap-x-4 px-6  text-sm font-semibold leading-6 text-gray-900 mb-10">
+              <div className="flex items-center gap-x-4 px-6 justify-between  text-sm font-semibold leading-6 text-gray-900 mb-10">
                 <div className="flex flex-col">
-                  <span>Utku Cengiz</span>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                  <span className="text-[#101828] font-semibold text-sm">
+                    Utku Cengiz
+                  </span>
+                  <span className="text-sm text-[#475467] font-normal ">
                     utkucengiz00@gmail.com
                   </span>
                 </div>
+                <button className="w-4 h-4 border-[2px] rounded-full border-[#475467]"></button>
               </div>
             </li>
           </ul>
