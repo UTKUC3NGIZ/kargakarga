@@ -40,7 +40,7 @@ export default function Dnd() {
       if (data) {
         const boardData = data.data;
         const newColumns = boardData.map((board) => ({
-          description: board.name,
+          title: board.name,
           column: board.name.toLowerCase().replace(/\s+/g, ""),
         }));
         const newCards = boardData.flatMap((board) =>
@@ -61,14 +61,9 @@ export default function Dnd() {
     initializeData();
   }, []);
 
-  const addColumn = (description) => {
+  const addColumn = (title) => {
     const newColumn = {
       title,
-      description,
-      startDate,
-      endDate,
-      flag,
-      column: description.toLowerCase().replace(/\s+/g, ""),
     };
     setColumns((prev) => [...prev, newColumn]);
   };
@@ -106,7 +101,7 @@ const Board = ({ cards, columns, setCards, addColumn }) => {
   );
 };
 
-const Column = ({ description, cards, column, setCards }) => {
+const Column = ({ cards, column, setCards, title }) => {
   const [active, setActive] = useState(false);
 
   const handleDragStart = (e, card) => {
@@ -212,9 +207,7 @@ const Column = ({ description, cards, column, setCards }) => {
     <div className="w-80 shrink-0 border rounded-t-lg rounded-b-lg bg-white px-1">
       <div className="mb-3 flex items-center justify-between px-4 py-5 ">
         <div className="flex flex-row gap-2 text-center justify-center items-center ">
-          <h3 className={`text-[#4E5BA6] text-base font-normal`}>
-            {description}
-          </h3>
+          <h3 className={`text-[#4E5BA6] text-base font-normal`}>{title}</h3>
           <div className="w-5 h-5 text-[#175CD3] border-[#B2DDFF] bg-[#eff7fe] rounded-full border   text-xs flex items-center justify-center">
             <span>{filteredCards.length}</span>
           </div>
@@ -404,11 +397,14 @@ const AddColumn = ({ addColumn }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="p-2">
+    <form
+      onSubmit={handleSubmit}
+      className="flex items-center justify-start text-xl flex-col gap-2 w-80 shrink-0 border rounded-t-lg rounded-b-lg bg-white"
+    >
       <input
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="text-sm text-neutral-700 rounded w-full border border-neutral-300 p-2"
+        className="text-neutral-700 rounded w-auto border border-neutral-300 p-2 text-xl my-5 mx-4"
         placeholder="New Column Title"
       />
       <div className="flex justify-end gap-2 p-1 pt-3">
