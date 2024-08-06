@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { FiPlus, FiTrash } from "react-icons/fi";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { motion } from "framer-motion";
+import { MdOutlineDateRange } from "react-icons/md";
+import { FaFlag } from "react-icons/fa";
+import { LuDiamond } from "react-icons/lu";
 
 const DEFAULT_CARDS = [
   // TODO
@@ -226,9 +229,20 @@ const Card = ({ title, id, column, handleDragStart }) => {
         layoutId={id}
         draggable="true"
         onDragStart={(e) => handleDragStart(e, { title, id, column })}
-        className="cursor-grab rounded h-auto border border-white-700 bg-white-800 p-3 active:cursor-grabbing"
+        className="cursor-grab rounded h-auto border border-white-700 bg-white-800 p-3 active:cursor-grabbing shadow-sm"
       >
+        <h2 className="text-orange-500">Operasyon Birimi</h2>
         <p className="text-sm text-[#475467]">{title}</p>
+        <div className="text-[#98A2B3] flex flex-row items-center py-3 text-xs gap-1">
+          <MdOutlineDateRange />
+          <span>05.02.2024 - 10.02.2024</span>
+        </div>
+        <div className="text-[#98A2B3] flex flex-row items-center text-xs">
+          <LuDiamond />
+
+          <span className="ps-1 pe-3">Milestone Name</span>
+          <FaFlag color="red" />
+        </div>
       </motion.div>
     </>
   );
