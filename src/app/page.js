@@ -60,7 +60,7 @@ function classNames(...classes) {
 
 export default function Home() {
   return (
-    <main className="bg-gray-50  antialiased">
+    <main className="bg-[#f1f7fe] h-screen  antialiased overflow-y-hidden">
       <nav className="bg-white border-b border-gray-200 px-4 py-2.5 fixed left-0 right-0 top-0 z-50">
         <div className="flex flex-wrap justify-between items-center">
           <div className="flex justify-start items-center">
@@ -753,7 +753,7 @@ export default function Home() {
         </button>
       </aside>
 
-      <main className=" p-4 lg:ml-80 h-full space-y-4 mt-16 bg-white">
+      <main className=" p-4 lg:ml-80 h-full space-y-4 mt-16 ">
         <h1 className="text-[22px] font-semibold text-[#145389]">
           Frontend Case
         </h1>
