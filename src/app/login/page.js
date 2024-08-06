@@ -1,7 +1,56 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Page() {
+  const router = useRouter();
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const combinedData = {
+      fullName: `${formData.firstName} ${formData.lastName}`,
+      email: formData.email,
+      password: formData.password,
+    };
+
+    try {
+      const response = await axios.post(
+        "https://api.management.parse25proje.link/api/auth/login",
+        combinedData
+      );
+
+      if (response.data.status) {
+        toast.success(response.data.messages || "Giriş başarıyla yapıldı.");
+        localStorage.setItem("userData", JSON.stringify(response.data.data));
+        router.push("/");
+      } else {
+        toast.error(response.data.messages || "Bir hata oluştu.");
+      }
+    } catch (error) {
+      toast.error(
+        error.response && error.response.data && error.response.data.messages
+          ? error.response.data.messages
+          : "Bir hata oluştu."
+      );
+    }
+  };
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -21,7 +70,7 @@ export default function Page() {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
           <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-            <form action="#" method="POST" className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label
                   htmlFor="email"
@@ -36,6 +85,7 @@ export default function Page() {
                     type="email"
                     required
                     autoComplete="email"
+                    onChange={handleChange}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -55,6 +105,7 @@ export default function Page() {
                     type="password"
                     required
                     autoComplete="current-password"
+                    onChange={handleChange}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -66,6 +117,7 @@ export default function Page() {
                     id="remember-me"
                     name="remember-me"
                     type="checkbox"
+                    onChange={handleChange}
                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                   />
                   <label
