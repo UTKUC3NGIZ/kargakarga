@@ -9,8 +9,8 @@ import { LuDiamond } from "react-icons/lu";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const userData = JSON.parse(localStorage.getItem("userData"));
-const token = userData.token;
+const userToken = JSON.parse(localStorage.getItem("userToken"));
+const token = userToken;
 
 const fetchBoards = async () => {
   try {

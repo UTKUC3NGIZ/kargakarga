@@ -38,7 +38,10 @@ export default function Page() {
 
       if (response.data.status) {
         toast.success(response.data.messages || "Giriş başarıyla yapıldı.");
-        localStorage.setItem("userData", JSON.stringify(response.data.data));
+        localStorage.setItem(
+          "userToken",
+          JSON.stringify(response.data.data.token)
+        );
         router.push("/");
       } else {
         toast.error(response.data.messages || "Bir hata oluştu.");
