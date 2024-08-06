@@ -24,7 +24,7 @@ const fetchBoards = async () => {
     );
     return response.data;
   } catch (error) {
-    toast.error("Hata: " + error);
+    console.error("Hata: " + error);
     return null;
   }
 };
@@ -41,7 +41,7 @@ const fetchFlags = async () => {
     );
     return response.data.data;
   } catch (error) {
-    toast.error("Hata: " + error);
+    console.error("Hata: " + error);
     return [];
   }
 };

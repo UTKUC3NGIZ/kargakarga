@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -7,7 +8,11 @@ import {
 } from "@headlessui/react";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { UsersIcon } from "@heroicons/react/24/outline";
-import Dnd from "./components/dnd";
+import Dnd from "@/components/Dnd";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 const navigation = [
   {
     name: "Proje İsmi 1",
@@ -59,6 +64,32 @@ function classNames(...classes) {
 }
 
 export default function Home() {
+  const userToken = JSON.parse(localStorage.getItem("userToken"));
+  const token = userToken;
+  const router = useRouter();
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get(
+          "https://api.management.parse25proje.link/api/auth/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(response.data.status, "response");
+        if (response.data.status === false) {
+          router.push("/login");
+        }
+      } catch (error) {
+        router.push("/login");
+        toast.error("Bir hata oluştu yada yetkiniz yok");
+      }
+    };
+
+    fetchProfile();
+  }, []);
   return (
     <main className="bg-[#f1f7fe] h-screen  antialiased overflow-y-hidden">
       <nav className="bg-white border-b border-gray-200 px-4 py-2.5 fixed left-0 right-0 top-0 z-50">
