@@ -14,6 +14,7 @@ import {
   HomeIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
+import Dnd from "./components/dnd";
 const navigation = [
   {
     name: "Proje İsmi 1",
@@ -586,26 +587,55 @@ export default function Home() {
         </button>
       </aside>
 
-      <main class="bg-gray-50 p-4 lg:ml-80 h-full space-y-4">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-16 h-1/6">
-          <div class="border-2 border-dashed border-gray-300  rounded-xl h-32 lg:h-64"></div>
-          <div class="border-2 border-dashed border-gray-300  rounded-xl h-32 lg:h-64"></div>
-          <div class="border-2 border-dashed border-gray-300  rounded-xl"></div>
-          <div class="border-2 border-dashed border-gray-300  rounded-xl h-32 lg:h-64"></div>
-        </div>
-        <div class="grid grid-cols-2 gap-4 h-1/4">
-          <div class="border-2 border-dashed border-gray-300  rounded-xl h-48 lg:h-96"></div>
-          <div class="border-2 border-dashed border-gray-300  rounded-xl h-48 lg:h-96"></div>
-        </div>
-        <div class="grid grid-cols-3 gap-4 h-1/4">
-          <div class="border-2 border-dashed border-gray-300  rounded-xl h-32 lg:h-64"></div>
-          <div class="border-2 border-dashed border-gray-300  rounded-xl h-32 lg:h-64"></div>
-          <div class="border-2 border-dashed border-gray-300  rounded-xl h-32 lg:h-64"></div>
-        </div>
-        <div class="grid grid-cols-2 gap-4 h-1/4">
-          <div class="border-2 border-dashed border-gray-300  rounded-xl h-48 lg:h-96"></div>
-          <div class="border-2 border-dashed border-gray-300  rounded-xl h-48 lg:h-96"></div>
-        </div>
+      <main class="bg-gray-50 p-4 lg:ml-80 h-full space-y-4 mt-16">
+        <h1 className="text-[22px] font-semibold text-[#145389]">
+          Frontend Case
+        </h1>
+        <span className="isolate inline-flex rounded-md shadow-sm">
+          <button
+            type="button"
+            className="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+          >
+            Boards
+          </button>
+          <button
+            type="button"
+            className="relative -ml-px inline-flex items-center bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+          >
+            List
+          </button>
+          <button
+            type="button"
+            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+          >
+            Other
+          </button>
+          <button
+            type="button"
+            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+          >
+            Other
+          </button>
+          <button
+            type="button"
+            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+          >
+            Other
+          </button>
+          <button
+            type="button"
+            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+          >
+            Other
+          </button>
+          <button
+            type="button"
+            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+          >
+            Other
+          </button>
+        </span>
+        <Dnd />
       </main>
     </main>
   );
