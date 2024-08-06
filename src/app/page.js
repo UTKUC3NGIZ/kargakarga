@@ -705,7 +705,7 @@ export default function Home() {
                 ))}
                 <button
                   type="button"
-                  className="inline-flex items-center gap-x-1.5 rounded-md px-2.5 py-1.5 text-sm font-normal text-[#98A2B3] hover:text-[#8f9cb3]  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
+                  className="inline-flex items-center gap-x-1.5 rounded-md px-2.5 py-1.5 text-sm font-normal text-[#98A2B3] hover:text-[#8f9cb3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 group"
                 >
                   <Image
                     src="/assets/img/wave.svg"
@@ -713,7 +713,9 @@ export default function Home() {
                     height={24}
                     alt="Picture of the author"
                   />
-                  Proje Oluştur
+                  <span className="group-hover:text-black font-semibold">
+                    Proje Oluştur
+                  </span>
                 </button>
               </ul>
             </li>
@@ -753,50 +755,50 @@ export default function Home() {
         </button>
       </aside>
 
-      <main className=" p-4 lg:ml-80 h-full space-y-4 mt-16 ">
-        <h1 className="text-[22px] font-semibold text-[#145389]">
+      <main className=" p-8 lg:ml-80 h-full space-y-4 mt-16 ">
+        <h1 className="text-[22px] font-semibold text-[#145389] py-6">
           Frontend Case
         </h1>
-        <span className="isolate inline-flex rounded-md shadow-sm">
+        <span className="isolate !m-0 inline-flex rounded-md shadow-sm">
           <button
             type="button"
-            className="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            className="relative inline-flex items-center rounded-l-md bg-white px-4 py-3 text-sm font-semibold text-[#145389] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black focus:z-10"
           >
             Boards
           </button>
           <button
             type="button"
-            className="relative -ml-px inline-flex items-center bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black focus:z-10"
           >
             List
           </button>
           <button
             type="button"
-            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black focus:z-10"
           >
             Other
           </button>
           <button
             type="button"
-            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black focus:z-10"
           >
             Other
           </button>
           <button
             type="button"
-            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black focus:z-10"
           >
             Other
           </button>
           <button
             type="button"
-            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black focus:z-10"
           >
             Other
           </button>
           <button
             type="button"
-            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black focus:z-10"
           >
             Other
           </button>

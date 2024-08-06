@@ -25,7 +25,7 @@ const Board = () => {
   };
 
   return (
-    <div className="flex  w-full gap-3 p-12">
+    <div className="flex  w-full gap-3 p-3">
       {columns.map((col) => (
         <Column
           key={col.column}
