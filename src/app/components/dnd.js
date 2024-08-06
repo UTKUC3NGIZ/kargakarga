@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiPlus, FiTrash } from "react-icons/fi";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { motion } from "framer-motion";
@@ -10,87 +10,92 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const userData = JSON.parse(localStorage.getItem("userData"));
-
 const token = userData.token;
 
-axios
-  .get("https://api.management.parse25proje.link/api/boards", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-  .then((response) => {
+const fetchBoards = async () => {
+  try {
+    const response = await axios.get(
+      "https://api.management.parse25proje.link/api/boards",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log(response.data);
-  })
-  .catch((error) => {
-    toast.error("Hata:", error);
-  });
-
-const DEFAULT_CARDS = [
-  // TODO
-  {
-    title: "Research DB options for new microservice",
-    id: "5",
-    column: "todo",
-  },
-  {
-    title:
-      "Research DB options for new microserviceResearch DB options for new microserviceResearch DB options for new microserviceResearch DB options for new microservice",
-    id: "8",
-    column: "todo",
-  },
-  { title: "Postmortem for outage", id: "6", column: "todo" },
-  { title: "Sync with product on Q3 roadmap", id: "7", column: "todo" },
-
-  // DOING
-  {
-    title:
-      "Research DB options for new microserviceResearch DB options for new microserviceResearch DB options for new microserviceResearch DB options for new microservice",
-    id: "8",
-    column: "doing",
-  },
-  { title: "Add logging to daily CRON", id: "9", column: "doing" },
-  // DONE
-  {
-    title: "Set up DD dashboards for Lambda listener",
-    id: "10",
-    column: "done",
-  },
-];
-
-const DEFAULT_COLUMNS = [
-  { title: "TODO", column: "todo" },
-  { title: "In progress", column: "doing" },
-  { title: "Complete", column: "done" },
-  { title: "Deneme", column: "deneme" },
-];
+    return response.data;
+  } catch (error) {
+    toast.error("Hata: " + error);
+    return null;
+  }
+};
 
 export default function Dnd() {
-  return (
-    <div className="h-full w-full  text-neutral-50">
-      <Board />
-    </div>
-  );
-}
+  const [cards, setCards] = useState([]);
+  const [columns, setColumns] = useState([]);
 
-const Board = () => {
-  const [cards, setCards] = useState(DEFAULT_CARDS);
-  const [columns, setColumns] = useState(DEFAULT_COLUMNS);
+  useEffect(() => {
+    const initializeData = async () => {
+      const data = await fetchBoards();
+      if (data) {
+        const boardData = data.data;
+        const newColumns = boardData.map((board) => ({
+          description: board.name,
+          column: board.name.toLowerCase().replace(/\s+/g, ""),
+        }));
+        const newCards = boardData.flatMap((board) =>
+          board.tasks.map((task) => ({
+            title: task.name,
+            description: task.description,
+            startDate: task.startDate,
+            endDate: task.endDate,
+            flag: task.flagId,
+            id: task.id.toString(),
+            column: board.name.toLowerCase().replace(/\s+/g, ""),
+          }))
+        );
+        setColumns(newColumns);
+        setCards(newCards);
+      }
+    };
+    initializeData();
+  }, []);
 
-  const addColumn = (title) => {
+  const addColumn = (description) => {
     const newColumn = {
       title,
-      column: title.toLowerCase().replace(/\s+/g, ""),
+      description,
+      startDate,
+      endDate,
+      flag,
+      column: description.toLowerCase().replace(/\s+/g, ""),
     };
     setColumns((prev) => [...prev, newColumn]);
   };
 
   return (
-    <div className="flex  w-full gap-3 p-3">
+    <div className="h-full w-full text-neutral-50">
+      <Board
+        cards={cards}
+        columns={columns}
+        setCards={setCards}
+        addColumn={addColumn}
+      />
+    </div>
+  );
+}
+
+const Board = ({ cards, columns, setCards, addColumn }) => {
+  return (
+    <div className="flex w-full gap-3 p-3">
       {columns.map((col) => (
         <Column
           key={col.column}
+          description={col.description}
           title={col.title}
+          startDate={col.startDate}
+          endDate={col.endDate}
+          flag={col.flag}
           column={col.column}
           cards={cards}
           setCards={setCards}
@@ -101,7 +106,7 @@ const Board = () => {
   );
 };
 
-const Column = ({ title, cards, column, setCards }) => {
+const Column = ({ description, cards, column, setCards }) => {
   const [active, setActive] = useState(false);
 
   const handleDragStart = (e, card) => {
@@ -207,7 +212,9 @@ const Column = ({ title, cards, column, setCards }) => {
     <div className="w-80 shrink-0 border rounded-t-lg rounded-b-lg bg-white px-1">
       <div className="mb-3 flex items-center justify-between px-4 py-5 ">
         <div className="flex flex-row gap-2 text-center justify-center items-center ">
-          <h3 className={`text-[#4E5BA6] text-base font-normal`}>{title}</h3>
+          <h3 className={`text-[#4E5BA6] text-base font-normal`}>
+            {description}
+          </h3>
           <div className="w-5 h-5 text-[#175CD3] border-[#B2DDFF] bg-[#eff7fe] rounded-full border   text-xs flex items-center justify-center">
             <span>{filteredCards.length}</span>
           </div>
@@ -239,7 +246,25 @@ const Column = ({ title, cards, column, setCards }) => {
   );
 };
 
-const Card = ({ title, id, column, handleDragStart }) => {
+const formatDate = (isoDate) => {
+  const date = new Date(isoDate);
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}.${month}.${year}`;
+};
+
+const Card = ({
+  description,
+  id,
+  column,
+  handleDragStart,
+  title,
+  startDate,
+  endDate,
+}) => {
+  const formattedStartDate = startDate ? formatDate(startDate) : "";
+  const formattedEndDate = endDate ? formatDate(endDate) : "";
   return (
     <>
       <DropIndicator beforeId={id} column={column} />
@@ -247,18 +272,19 @@ const Card = ({ title, id, column, handleDragStart }) => {
         layout
         layoutId={id}
         draggable="true"
-        onDragStart={(e) => handleDragStart(e, { title, id, column })}
+        onDragStart={(e) => handleDragStart(e, { description, id, column })}
         className="cursor-grab rounded h-auto border border-white-700 bg-white-800 p-3 active:cursor-grabbing shadow-sm"
       >
-        <h2 className="text-orange-500">Operasyon Birimi</h2>
-        <p className="text-sm text-[#475467]">{title}</p>
+        <h2 className="text-orange-500">{title}</h2>
+        <p className="text-sm text-[#475467]">{description}</p>
         <div className="text-[#98A2B3] flex flex-row items-center py-3 text-xs gap-1">
           <MdOutlineDateRange />
-          <span>05.02.2024 - 10.02.2024</span>
+          <span>
+            {formattedStartDate} - {formattedEndDate}
+          </span>
         </div>
         <div className="text-[#98A2B3] flex flex-row items-center text-xs">
           <LuDiamond />
-
           <span className="ps-1 pe-3">Milestone Name</span>
           <FaFlag color="red" />
         </div>
@@ -283,57 +309,53 @@ const AddCard = ({ column, setCards }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!text.trim().length) return;
-
     const newCard = {
-      column,
-      title: text.trim(),
-      id: Math.random().toString(),
+      id: Math.floor(Math.random() * 1000).toString(),
+      description: text,
+      column: column,
     };
 
-    setCards((pv) => [...pv, newCard]);
-
+    setCards((prev) => [...prev, newCard]);
+    setText("");
     setAdding(false);
   };
 
+  if (!adding) {
+    return (
+      <button
+        onClick={() => setAdding(true)}
+        className="m-4 flex flex-row gap-2 items-center p-1 text-[#98A2B3] hover:text-black"
+      >
+        <FiPlus />
+        <span>Add Task</span>
+      </button>
+    );
+  }
+
   return (
-    <>
-      {adding ? (
-        <motion.form layout onSubmit={handleSubmit}>
-          <textarea
-            onChange={(e) => setText(e.target.value)}
-            autoFocus
-            placeholder="Add new task..."
-            className="w-full rounded border border-[violet-400] bg-white p-3 text-sm  placeholder-[#4E5BA6] focus:outline-0 text-[#4E5BA6]  "
-          />
-          <div className="mt-1.5 flex items-center justify-end gap-1.5">
-            <button
-              onClick={() => setAdding(false)}
-              className="px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:text-black"
-            >
-              Close
-            </button>
-            <button
-              type="submit"
-              className="flex items-center gap-1.5 rounded bg-neutral-50 px-3 py-1.5 text-xs text-neutral-950 transition-colors hover:bg-[#4E5BA6] hover:text-white"
-            >
-              <span>Add</span>
-              <FiPlus />
-            </button>
-          </div>
-        </motion.form>
-      ) : (
-        <motion.button
-          layout
-          onClick={() => setAdding(true)}
-          className="flex w-full items-center gap-1.5 px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:text-black"
+    <form onSubmit={handleSubmit} className="p-4">
+      <input
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        className="text-sm text-neutral-700 rounded w-full border border-neutral-300 p-2"
+        placeholder="New Task Name"
+      />
+      <div className="flex justify-end gap-2 p-1 pt-3">
+        <button
+          type="button"
+          onClick={() => setAdding(false)}
+          className="text-sm text-neutral-700 px-3 py-1 rounded hover:bg-neutral-200"
         >
-          <span>Add card</span>
-          <FiPlus />
-        </motion.button>
-      )}
-    </>
+          Cancel
+        </button>
+        <button
+          type="submit"
+          className="text-sm bg-[#175CD3] text-white px-3 py-1 rounded hover:bg-blue-600"
+        >
+          Add
+        </button>
+      </div>
+    </form>
   );
 };
 
@@ -343,52 +365,48 @@ const AddColumn = ({ addColumn }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!text.trim().length) return;
-
-    addColumn(text.trim());
-
-    setText("");
-    setAdding(false);
+    if (text.trim()) {
+      addColumn(text.trim());
+      setText("");
+      setAdding(false);
+    }
   };
 
+  if (!adding) {
+    return (
+      <button
+        onClick={() => setAdding(true)}
+        className="flex items-center gap-2 text-[#98A2B3] hover:text-black"
+      >
+        <FiPlus />
+        Add Column
+      </button>
+    );
+  }
+
   return (
-    <>
-      {adding ? (
-        <motion.form layout onSubmit={handleSubmit}>
-          <input
-            type="text"
-            onChange={(e) => setText(e.target.value)}
-            autoFocus
-            placeholder="Column title..."
-            className="w-full rounded border border-violet-400 bg-violet-400/20 p-3 text-sm text-neutral-50 placeholder-violet-300 focus:outline-0"
-          />
-          <div className="mt-1.5 flex items-center justify-end gap-1.5">
-            <button
-              onClick={() => setAdding(false)}
-              className="px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:text-neutral-50"
-            >
-              Close
-            </button>
-            <button
-              type="submit"
-              className="flex items-center gap-1.5 rounded bg-neutral-50 px-3 py-1.5 text-xs text-neutral-950 transition-colors hover:bg-neutral-300"
-            >
-              <span>Add</span>
-              <FiPlus />
-            </button>
-          </div>
-        </motion.form>
-      ) : (
-        <motion.button
-          layout
-          onClick={() => setAdding(true)}
-          className="flex flex-col items-center gap-1.5 py-1.5 font-medium text-xl text-neutral-400 transition-colors hover:text-gray-500 w-80 shrink-0 border rounded-t-lg rounded-b-lg bg-white px-1 justify-center"
+    <form onSubmit={handleSubmit} className="p-2">
+      <input
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        className="text-sm text-neutral-700 rounded w-full border border-neutral-300 p-2"
+        placeholder="New Column Title"
+      />
+      <div className="flex justify-end gap-2 p-1 pt-3">
+        <button
+          type="button"
+          onClick={() => setAdding(false)}
+          className="text-sm text-neutral-700 px-3 py-1 rounded hover:bg-neutral-200"
         >
-          <FiPlus size={"24px"} />
-          <span>Add Board</span>
-        </motion.button>
-      )}
-    </>
+          Cancel
+        </button>
+        <button
+          type="submit"
+          className="text-sm bg-[#175CD3] text-white px-3 py-1 rounded hover:bg-blue-600"
+        >
+          Add
+        </button>
+      </div>
+    </form>
   );
 };
