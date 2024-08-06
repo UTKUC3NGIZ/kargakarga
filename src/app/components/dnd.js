@@ -22,7 +22,6 @@ const fetchBoards = async () => {
         },
       }
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     toast.error("Hata: " + error);
@@ -30,20 +29,40 @@ const fetchBoards = async () => {
   }
 };
 
+const fetchFlags = async () => {
+  try {
+    const response = await axios.get(
+      "https://api.management.parse25proje.link/api/commons/flags",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data.data;
+  } catch (error) {
+    toast.error("Hata: " + error);
+    return [];
+  }
+};
+
 export default function Dnd() {
   const [cards, setCards] = useState([]);
   const [columns, setColumns] = useState([]);
-
+  const [flags, setFlags] = useState([]);
   useEffect(() => {
     const initializeData = async () => {
-      const data = await fetchBoards();
-      if (data) {
-        const boardData = data.data;
-        const newColumns = boardData.map((board) => ({
+      const [boardData, flagData] = await Promise.all([
+        fetchBoards(),
+        fetchFlags(),
+      ]);
+      if (boardData && flagData) {
+        const boards = boardData.data;
+        const newColumns = boards.map((board) => ({
           title: board.name,
           column: board.name.toLowerCase().replace(/\s+/g, ""),
         }));
-        const newCards = boardData.flatMap((board) =>
+        const newCards = boards.flatMap((board) =>
           board.tasks.map((task) => ({
             title: task.name,
             description: task.description,
@@ -56,6 +75,7 @@ export default function Dnd() {
         );
         setColumns(newColumns);
         setCards(newCards);
+        setFlags(flagData);
       }
     };
     initializeData();
@@ -72,6 +92,7 @@ export default function Dnd() {
     <div className="h-full w-full text-neutral-50">
       <Board
         cards={cards}
+        flags={flags}
         columns={columns}
         setCards={setCards}
         addColumn={addColumn}
@@ -80,7 +101,7 @@ export default function Dnd() {
   );
 }
 
-const Board = ({ cards, columns, setCards, addColumn }) => {
+const Board = ({ cards, columns, setCards, addColumn, flags }) => {
   return (
     <div className="flex w-full gap-3 p-3">
       {columns.map((col) => (
@@ -94,6 +115,7 @@ const Board = ({ cards, columns, setCards, addColumn }) => {
           column={col.column}
           cards={cards}
           setCards={setCards}
+          flags={flags}
         />
       ))}
       <AddColumn addColumn={addColumn} />
@@ -101,7 +123,7 @@ const Board = ({ cards, columns, setCards, addColumn }) => {
   );
 };
 
-const Column = ({ cards, column, setCards, title }) => {
+const Column = ({ cards, column, setCards, title, flags }) => {
   const [active, setActive] = useState(false);
 
   const handleDragStart = (e, card) => {
@@ -230,7 +252,14 @@ const Column = ({ cards, column, setCards, title }) => {
         }`}
       >
         {filteredCards.map((c) => {
-          return <Card key={c.id} {...c} handleDragStart={handleDragStart} />;
+          return (
+            <Card
+              key={c.id}
+              {...c}
+              handleDragStart={handleDragStart}
+              flags={flags}
+            />
+          );
         })}
         <DropIndicator beforeId={null} column={column} />
         <AddCard column={column} setCards={setCards} />
@@ -247,23 +276,6 @@ const formatDate = (isoDate) => {
   return `${day}.${month}.${year}`;
 };
 
-const getFlagColor = (flagId) => {
-  switch (flagId) {
-    case 1:
-      return "red";
-    case 2:
-      return "orange";
-    case 3:
-      return "yellow";
-    case 4:
-      return "green";
-    case 5:
-      return "blue";
-    default:
-      return "gray";
-  }
-};
-
 const Card = ({
   description,
   id,
@@ -272,11 +284,18 @@ const Card = ({
   title,
   startDate,
   endDate,
+  flags,
   flag,
 }) => {
   const formattedStartDate = startDate ? formatDate(startDate) : "";
   const formattedEndDate = endDate ? formatDate(endDate) : "";
-  const flagColor = getFlagColor(flag);
+  const flagData = Array.isArray(flags)
+    ? flags.find((f) => f.id === flag)
+    : null;
+  const flagColor = flagData ? flagData.color : "#000000";
+
+  console.log("Card Data:", { title, flag, flagData, flagColor });
+
   return (
     <>
       <DropIndicator beforeId={id} column={column} />
