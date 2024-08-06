@@ -6,6 +6,25 @@ import { motion } from "framer-motion";
 import { MdOutlineDateRange } from "react-icons/md";
 import { FaFlag } from "react-icons/fa";
 import { LuDiamond } from "react-icons/lu";
+import axios from "axios";
+import toast from "react-hot-toast";
+
+const userData = JSON.parse(localStorage.getItem("userData"));
+
+const token = userData.token;
+
+axios
+  .get("https://api.management.parse25proje.link/api/boards", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then((response) => {
+    console.log(response.data);
+  })
+  .catch((error) => {
+    toast.error("Hata:", error);
+  });
 
 const DEFAULT_CARDS = [
   // TODO
