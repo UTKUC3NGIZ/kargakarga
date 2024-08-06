@@ -144,8 +144,8 @@ const Column = ({ title, headingColor, cards, column, setCards }) => {
   const filteredCards = cards.filter((c) => c.column === column);
 
   return (
-    <div className="w-56 shrink-0">
-      <div className="mb-3 flex items-center justify-between">
+    <div className="w-56 shrink-0 border rounded-t-lg rounded-b-lg bg-white px-1">
+      <div className="mb-3 flex items-center justify-between px-4 py-5 ">
         <h3 className={`font-medium ${headingColor}`}>{title}</h3>
         <span className="rounded text-sm text-neutral-400">
           {filteredCards.length}
@@ -155,7 +155,7 @@ const Column = ({ title, headingColor, cards, column, setCards }) => {
         onDrop={handleDragEnd}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
-        className={`h-full w-full transition-colors ${
+        className={`h-full w-full transition-colors overflow-auto  ${
           active ? "bg-neutral-800/50" : "bg-neutral-800/0"
         }`}
       >
@@ -178,9 +178,9 @@ const Card = ({ title, id, column, handleDragStart }) => {
         layoutId={id}
         draggable="true"
         onDragStart={(e) => handleDragStart(e, { title, id, column })}
-        className="cursor-grab rounded border border-neutral-700 bg-neutral-800 p-3 active:cursor-grabbing"
+        className="cursor-grab rounded border border-white-700 bg-white-800 p-3 active:cursor-grabbing"
       >
-        <p className="text-sm text-neutral-100">{title}</p>
+        <p className="text-sm text-[#475467]">{title}</p>
       </motion.div>
     </>
   );
