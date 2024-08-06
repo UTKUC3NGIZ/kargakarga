@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function Dnd() {
   return (
-    <div className="h-screen w-full  text-neutral-50">
+    <div className="h-full w-full  text-neutral-50">
       <Board />
     </div>
   );
@@ -25,7 +25,7 @@ const Board = () => {
   };
 
   return (
-    <div className="flex h-full w-full gap-3 p-12">
+    <div className="flex  w-full gap-3 p-12">
       {columns.map((col) => (
         <Column
           key={col.column}
@@ -155,7 +155,7 @@ const Column = ({ title, headingColor, cards, column, setCards }) => {
         onDrop={handleDragEnd}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
-        className={`h-full w-full transition-colors overflow-auto  ${
+        className={`h-[500px] w-full transition-colors overflow-y-auto overflow-x-hidden  ${
           active ? "bg-neutral-800/50" : "bg-neutral-800/0"
         }`}
       >

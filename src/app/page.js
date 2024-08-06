@@ -6,14 +6,7 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
-import {
-  CalendarIcon,
-  ChartPieIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
-} from "@heroicons/react/24/outline";
+import { UsersIcon } from "@heroicons/react/24/outline";
 import Dnd from "./components/dnd";
 const navigation = [
   {
@@ -66,7 +59,7 @@ export default function Home() {
                 height={32}
                 alt="Picture of the author"
               />
-              <span class="self-center text-2xl font-semibold whitespace-nowrap ">
+              <span class="self-center text-xl font-bold whitespace-nowrap text-[#145389] pl-4">
                 KargaKarga
               </span>
             </Link>
@@ -78,14 +71,20 @@ export default function Home() {
               class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100  focus:ring-4 "
             >
               <span class="sr-only">View notifications</span>
+
               <svg
-                aria-hidden="true"
-                class="w-6 h-6"
-                fill="currentColor"
-                viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
               >
-                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+                />
               </svg>
             </button>
             <button
@@ -95,15 +94,26 @@ export default function Home() {
             >
               <span class="sr-only">View notifications</span>
               <svg
-                aria-hidden="true"
-                class="w-6 h-6"
-                fill="currentColor"
-                viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
               >
-                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+                />
               </svg>
             </button>
+            <Image
+              src="/assets/img/25.png"
+              width={50}
+              height={50}
+              alt="Picture of the author"
+            />
 
             <div
               class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg   rounded-xl"
@@ -587,7 +597,7 @@ export default function Home() {
         </button>
       </aside>
 
-      <main class="bg-gray-50 p-4 lg:ml-80 h-full space-y-4 mt-16">
+      <main class=" p-4 lg:ml-80 h-full space-y-4 mt-16 bg-white">
         <h1 className="text-[22px] font-semibold text-[#145389]">
           Frontend Case
         </h1>
