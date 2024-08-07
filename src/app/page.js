@@ -69,7 +69,7 @@ export default function Home() {
   const token = userToken;
   const router = useRouter();
   const [profile, setProfile] = useState({});
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
