@@ -61,6 +61,7 @@ export default function Dnd() {
         const newColumns = boards.map((board) => ({
           title: board.name,
           column: board.name.toLowerCase().replace(/\s+/g, ""),
+          id: board.id,
         }));
         const newCards = boards.flatMap((board) =>
           board.tasks.map((task) => ({
@@ -116,6 +117,7 @@ const Board = ({ cards, columns, setCards, addColumn, flags }) => {
           cards={cards}
           setCards={setCards}
           flags={flags}
+          id={col.id}
         />
       ))}
       <AddColumn addColumn={addColumn} />
@@ -123,7 +125,7 @@ const Board = ({ cards, columns, setCards, addColumn, flags }) => {
   );
 };
 
-const Column = ({ cards, column, setCards, title, flags }) => {
+const Column = ({ cards, column, setCards, title, flags, id }) => {
   const [active, setActive] = useState(false);
 
   const handleDragStart = (e, card) => {
