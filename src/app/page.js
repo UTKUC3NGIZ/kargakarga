@@ -743,10 +743,7 @@ export default function Home() {
                         </DisclosureButton>
                         <DisclosurePanel as="ul" className="mt-1 px-2">
                           {item.children.map((subItem) => (
-                            <li
-                              key={subItem.name}
-                              className="flex flex-row justify-between items-center"
-                            >
+                            <li key={subItem.name}>
                               <DisclosureButton
                                 as="a"
                                 href={subItem.href}
@@ -754,18 +751,18 @@ export default function Home() {
                                   subItem.current
                                     ? "bg-gray-50"
                                     : "hover:bg-gray-50",
-                                  "block rounded-md py-2 pl-9 pr-2 text-sm leading-6 text-gray-700"
+                                  " rounded-md py-2 pl-9 pr-2 text-sm leading-6 text-gray-700 flex flex-row justify-between items-center"
                                 )}
                               >
                                 {subItem.name}
+                                <span>
+                                  {subItem.alert && (
+                                    <span className="text-xs text-[#344054]  px-2 py-[2px] rounded-full border bg-[#F9FAFB]">
+                                      {subItem.alert}
+                                    </span>
+                                  )}
+                                </span>
                               </DisclosureButton>
-                              <span>
-                                {subItem.alert && (
-                                  <span className="text-xs text-[#344054]  px-2 py-[2px] rounded-full border bg-[#F9FAFB]">
-                                    {subItem.alert}
-                                  </span>
-                                )}
-                              </span>
                             </li>
                           ))}
                         </DisclosurePanel>
