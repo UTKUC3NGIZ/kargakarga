@@ -18,46 +18,46 @@ import Detail from "@/components/detail.js";
 const navigation = [
   {
     name: "Proje İsmi 1",
-    icon: UsersIcon,
+    color: "bg-red-500",
     current: false,
     children: [
-      { name: "Overview", href: "#" },
-      { name: "Notifications", href: "#" },
-      { name: "Analytics", href: "#" },
-      { name: "Reports", href: "#" },
+      { name: "Overview", href: "#", alert: 5 },
+      { name: "Notifications", href: "#", alert: 6 },
+      { name: "Analytics", href: "#", alert: 10 },
+      { name: "Reports", href: "#", alert: 2 },
     ],
   },
   {
     name: "Proje İsmi 2",
-    icon: UsersIcon,
+    color: "bg-yellow-500",
     current: false,
     children: [
-      { name: "Overview", href: "#" },
-      { name: "Notifications", href: "#" },
-      { name: "Analytics", href: "#" },
-      { name: "Reports", href: "#" },
+      { name: "Overview", href: "#", alert: 4 },
+      { name: "Notifications", href: "#", alert: 12 },
+      { name: "Analytics", href: "#", alert: 10 },
+      { name: "Reports", href: "#", alert: 10 },
     ],
   },
   {
     name: "Proje İsmi 3",
-    icon: UsersIcon,
+    color: "bg-green-500",
     current: false,
     children: [
-      { name: "Overview", href: "#" },
-      { name: "Notifications", href: "#" },
-      { name: "Analytics", href: "#" },
-      { name: "Reports", href: "#" },
+      { name: "Overview", href: "#", alert: 10 },
+      { name: "Notifications", href: "#", alert: 8 },
+      { name: "Analytics", href: "#", alert: 10 },
+      { name: "Reports", href: "#", alert: 12 },
     ],
   },
   {
     name: "Proje İsmi 4",
-    icon: UsersIcon,
+    color: "bg-blue-500",
     current: false,
     children: [
-      { name: "Overview", href: "#" },
-      { name: "Notifications", href: "#" },
-      { name: "Analytics", href: "#" },
-      { name: "Reports", href: "#" },
+      { name: "Overview", href: "#", alert: 3 },
+      { name: "Notifications", href: "#", alert: 10 },
+      { name: "Analytics", href: "#", alert: 5 },
+      { name: "Reports", href: "#", alert: 10 },
     ],
   },
 ];
@@ -711,9 +711,11 @@ export default function Home() {
                           "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700"
                         )}
                       >
-                        <item.icon
-                          aria-hidden="true"
-                          className="h-6 w-6 shrink-0 text-gray-400"
+                        <div
+                          className={classNames(
+                            item.color,
+                            "h-2.5 w-2.5 rounded-full"
+                          )}
                         />
                         {item.name}
                       </a>
@@ -725,9 +727,11 @@ export default function Home() {
                             "group flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm font-semibold leading-6 text-gray-700"
                           )}
                         >
-                          <item.icon
-                            aria-hidden="true"
-                            className="h-6 w-6 shrink-0 text-gray-400"
+                          <div
+                            className={classNames(
+                              item.color,
+                              "h-2.5 w-2.5 rounded-full"
+                            )}
                           />
                           {item.name}
                           <ChevronRightIcon
@@ -737,8 +741,10 @@ export default function Home() {
                         </DisclosureButton>
                         <DisclosurePanel as="ul" className="mt-1 px-2">
                           {item.children.map((subItem) => (
-                            <li key={subItem.name}>
-                              {/* 44px */}
+                            <li
+                              key={subItem.name}
+                              className="flex flex-row justify-between items-center"
+                            >
                               <DisclosureButton
                                 as="a"
                                 href={subItem.href}
@@ -751,6 +757,13 @@ export default function Home() {
                               >
                                 {subItem.name}
                               </DisclosureButton>
+                              <span>
+                                {subItem.alert && (
+                                  <span className="text-xs text-[#344054]  px-2 py-[2px] rounded-full border bg-[#F9FAFB]">
+                                    {subItem.alert}
+                                  </span>
+                                )}
+                              </span>
                             </li>
                           ))}
                         </DisclosurePanel>
