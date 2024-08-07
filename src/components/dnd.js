@@ -294,8 +294,6 @@ const Card = ({
     : null;
   const flagColor = flagData ? flagData.color : "#000000";
 
-  console.log("Card Data:", { title, flag, flagData, flagColor });
-
   return (
     <>
       <DropIndicator beforeId={id} column={column} />

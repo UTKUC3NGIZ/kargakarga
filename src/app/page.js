@@ -78,7 +78,6 @@ export default function Home() {
             },
           }
         );
-        console.log(response.data.status, "response");
         if (response.data.status === false) {
           router.push("/login");
         }
