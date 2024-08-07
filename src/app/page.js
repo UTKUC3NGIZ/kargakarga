@@ -8,7 +8,7 @@ import {
 } from "@headlessui/react";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { UsersIcon } from "@heroicons/react/24/outline";
-import Dnd from "@/components/Dnd";
+import Dnd from "@/components/dnd.js";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -180,7 +180,7 @@ export default function Home() {
             />
 
             <div
-              className="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg   rounded-xl"
+              className="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white divide-y divide-gray-100 shadow-lg   rounded-xl"
               id="apps-dropdown"
             >
               <div className="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50  ">
@@ -344,7 +344,7 @@ export default function Home() {
             </div>
 
             <div
-              className="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow   rounded-xl"
+              className="hidden z-50 my-4 w-56 text-base list-none bg-white divide-y divide-gray-100 shadow   rounded-xl"
               id="dropdown"
             >
               <div className="py-3 px-4">
@@ -768,7 +768,7 @@ export default function Home() {
           id="hide-secondary-sidenav-button"
           aria-controls="secondary-sidenav"
           type="button"
-          className="inline-flex absolute bottom-16 left-20 p-2 text-gray-500 rounded-full cursor-pointer  hover:text-gray-900 hover:bg-gray-200 bg-white hidden"
+          className=" absolute bottom-16 left-20 p-2 text-gray-500 rounded-full cursor-pointer  hover:text-gray-900 hover:bg-gray-200 bg-white hidden"
         >
           <svg
             className="w-6 h-6"
