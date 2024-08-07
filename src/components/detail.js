@@ -258,7 +258,7 @@ export default function Detail({ open, setOpen }) {
                         <GoPaperclip /> Comment
                       </Tab>
                     </TabList>
-                    <TabPanels>
+                    <TabPanels className={"h-full border rounded-b-lg p-3"}>
                       <TabPanel>Content 1</TabPanel>
                       <TabPanel>Content 2</TabPanel>
                       <TabPanel>Content 3</TabPanel>
