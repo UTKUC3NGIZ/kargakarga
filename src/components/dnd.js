@@ -45,7 +45,7 @@ const fetchFlags = async () => {
   }
 };
 
-export default function Dnd({ open, setOpen, setDndFilter, dndFilter }) {
+export default function Dnd({ open, setOpen, dndFilter, setDetailData }) {
   const [cards, setCards] = useState([]);
   const [columns, setColumns] = useState([]);
   const [flags, setFlags] = useState([]);

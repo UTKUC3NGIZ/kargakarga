@@ -100,6 +100,7 @@ export default function Home() {
   const [profile, setProfile] = useState({});
   const [openModal, setOpenModal] = useState(false);
   const [leftBar, setLeftBar] = useState(false);
+  const [detailData, setDetailData] = useState(null);
   const [dndFilter, setDndFilter] = useState(
     filter.options.reduce((acc, option) => {
       acc[option.value] = option.checked;
@@ -948,8 +949,8 @@ export default function Home() {
                   <Dnd
                     key={tab.key}
                     setOpen={setOpenModal}
-                    setDndFilter={setDndFilter}
                     dndFilter={dndFilter}
+                    setDetailData={setDetailData}
                   />
                 )
             )}
