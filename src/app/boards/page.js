@@ -75,6 +75,9 @@ export default function Home() {
   useEffect(() => {
     const userToken = JSON.parse(localStorage.getItem("userToken"));
     setToken(userToken);
+    if (!userToken) {
+      router.push("/login");
+    }
   }, []);
 
   useEffect(() => {

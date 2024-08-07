@@ -4,10 +4,17 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const router = useRouter();
+
+  useEffect(() => {
+    const userToken = JSON.parse(localStorage.getItem("userToken"));
+    if (userToken) {
+      router.push("/boards");
+    }
+  }, []);
 
   const [formData, setFormData] = useState({
     email: "",

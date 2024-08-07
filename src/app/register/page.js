@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import toast from "react-hot-toast";
@@ -8,7 +8,12 @@ import { useRouter } from "next/navigation";
 
 export default function Page() {
   const router = useRouter();
-
+  useEffect(() => {
+    const userToken = JSON.parse(localStorage.getItem("userToken"));
+    if (userToken) {
+      router.push("/boards");
+    }
+  }, []);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
