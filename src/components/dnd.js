@@ -306,7 +306,7 @@ const Column = ({
         onDrop={handleDragEnd}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
-        className={`h-[500px] w-full transition-colors overflow-y-auto overflow-x-hidden  ${
+        className={`sm:h-[500px] h-[300px] w-full transition-colors overflow-y-auto overflow-x-hidden  ${
           active ? "bg-white opacity-80" : "bg-white"
         }`}
       >

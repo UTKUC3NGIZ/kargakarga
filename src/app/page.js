@@ -146,7 +146,7 @@ export default function Home() {
             <button
               type="button"
               data-dropdown-toggle="notification-dropdown"
-              className="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100  focus:ring-4 "
+              className="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100  focus:ring-4 sm:block hidden"
             >
               <span className="sr-only">View notifications</span>
 
@@ -168,7 +168,7 @@ export default function Home() {
             <button
               type="button"
               data-dropdown-toggle="notification-dropdown"
-              className="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100  focus:ring-4 "
+              className="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100  focus:ring-4 sm:block hidden"
             >
               <span className="sr-only">View notifications</span>
               <svg
