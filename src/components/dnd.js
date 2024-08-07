@@ -50,6 +50,7 @@ export default function Dnd() {
   const [cards, setCards] = useState([]);
   const [columns, setColumns] = useState([]);
   const [flags, setFlags] = useState([]);
+
   useEffect(() => {
     const initializeData = async () => {
       const [boardData, flagData] = await Promise.all([
@@ -264,7 +265,7 @@ const Column = ({ cards, column, setCards, title, flags, id }) => {
           );
         })}
         <DropIndicator beforeId={null} column={column} />
-        <AddCard column={column} setCards={setCards} />
+        <AddCard column={column} setCards={setCards} id={id} />
       </div>
     </div>
   );
@@ -334,21 +335,42 @@ const DropIndicator = ({ beforeId, column }) => {
   );
 };
 
-const AddCard = ({ column, setCards }) => {
+const AddCard = ({ column, setCards, id }) => {
   const [text, setText] = useState("");
   const [adding, setAdding] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newCard = {
-      id: Math.floor(Math.random() * 1000).toString(),
-      description: text,
-      column: column,
-    };
+    try {
+      await axios.post(
+        "https://api.management.parse25proje.link/api/tasks",
+        {
+          name: text,
+          description: "",
+          boardId: id,
+          flagId: 3,
+          startDate: "2024-02-15T10:00:00",
+          endDate: "2024-02-20T10:00:00",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const newCard = {
+        id: Math.floor(Math.random() * 1000).toString(),
+        name: text,
+        description: "",
+        column: column,
+      };
 
-    setCards((prev) => [...prev, newCard]);
-    setText("");
-    setAdding(false);
+      setCards((prev) => [...prev, newCard]);
+      setText("");
+      setAdding(false);
+    } catch (error) {
+      console.error("Görev oluşturulurken hata oluştu:", error);
+    }
   };
 
   if (!adding) {
