@@ -283,27 +283,36 @@ const Column = ({ cards, column, setCards, title, flags, id }) => {
           </button>
         </div>
       </div>
-      <div
-        onDrop={handleDragEnd}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        className={`h-[500px] w-full transition-colors overflow-y-auto overflow-x-hidden  ${
-          active ? "bg-white opacity-80" : "bg-white"
-        }`}
-      >
-        {filteredCards.map((c) => {
-          return (
-            <Card
-              key={c.id}
-              {...c}
-              handleDragStart={handleDragStart}
-              flags={flags}
-            />
-          );
-        })}
-        <DropIndicator beforeId={null} column={column} />
-        <AddCard column={column} setCards={setCards} id={id} />
-      </div>
+      {filteredCards.length === 0 ? (
+        <div className="flex justify-center flex-col items-center h-[500px] group/item">
+          <img src="/assets/img/kargakargaBoard.png" alt="No cards available" />
+          <div className=" transition-opacity duration-300 opacity-0 invisible group-hover/item:opacity-100 group-hover/item:visible">
+            <AddCard column={column} setCards={setCards} id={id} />
+          </div>
+        </div>
+      ) : (
+        <div
+          onDrop={handleDragEnd}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          className={`h-[500px] w-full transition-colors overflow-y-auto overflow-x-hidden  ${
+            active ? "bg-white opacity-80" : "bg-white"
+          }`}
+        >
+          {filteredCards.map((c) => {
+            return (
+              <Card
+                key={c.id}
+                {...c}
+                handleDragStart={handleDragStart}
+                flags={flags}
+              />
+            );
+          })}
+          <DropIndicator beforeId={null} column={column} />
+          <AddCard column={column} setCards={setCards} id={id} />
+        </div>
+      )}
     </div>
   );
 };
