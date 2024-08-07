@@ -7,11 +7,16 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { IoIosSearch } from "react-icons/io";
+import { IoIosSearch, IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { IoFilterOutline } from "react-icons/io5";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { CiShare1, CiStar } from "react-icons/ci";
+import { RxCross1 } from "react-icons/rx";
 
 import {
   ChatBubbleLeftEllipsisIcon,
+  ChevronRightIcon,
+  HomeIcon,
   TagIcon,
   UserCircleIcon,
 } from "@heroicons/react/20/solid";
@@ -53,6 +58,46 @@ const activity = [
     comment: "Invited Alisa Hester to the team",
     date: "6d ago",
   },
+  {
+    id: 1,
+    type: "comment",
+    person: { name: "Eduardo Benz", href: "#" },
+    imageUrl:
+      "https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
+    comment: "Invited Alisa Hester to the team",
+    date: "6d ago",
+  },
+  {
+    id: 1,
+    type: "comment",
+    person: { name: "Eduardo Benz", href: "#" },
+    imageUrl:
+      "https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
+    comment: "Invited Alisa Hester to the team",
+    date: "6d ago",
+  },
+  {
+    id: 1,
+    type: "comment",
+    person: { name: "Eduardo Benz", href: "#" },
+    imageUrl:
+      "https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
+    comment: "Invited Alisa Hester to the team",
+    date: "6d ago",
+  },
+  {
+    id: 1,
+    type: "comment",
+    person: { name: "Eduardo Benz", href: "#" },
+    imageUrl:
+      "https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
+    comment: "Invited Alisa Hester to the team",
+    date: "6d ago",
+  },
+];
+const pages = [
+  { name: "Projects", href: "#", current: false },
+  { name: "Project Nero", href: "#", current: true },
 ];
 
 function classNames(...classes) {
@@ -73,26 +118,87 @@ export default function Detail({ open, setOpen }) {
             transition
             className="relative transform  overflow-hidden rounded-lg bg-white  text-left shadow-xl transition-all 
             data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in
-             sm:my-8  w-3/4 min-h-full h-[768px]  data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
+             sm:my-8  w-3/4 min-h-full data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
           >
-            <div className="mt-3 sm:mt-5 grid grid-cols-12 h-full">
-              <div className="col-span-12"></div>
+            <div className="mt-3 grid grid-cols-12 h-full">
+              <div className="col-span-12 py-5 border-b px-5 flex flex-row justify-between h-fit">
+                <nav
+                  aria-label="Breadcrumb"
+                  className="flex flex-row items-start h-fit"
+                >
+                  <div className="flex gap-3 flex-row pr-6">
+                    <button className="text-xl">
+                      <IoIosArrowUp />
+                    </button>
+                    <button className="text-xl">
+                      <IoIosArrowDown />
+                    </button>
+                  </div>
+                  <ol role="list" className="flex items-center space-x-4">
+                    <li>
+                      <div>
+                        <a
+                          href="#"
+                          className="text-gray-400 hover:text-gray-500"
+                        >
+                          <HomeIcon
+                            aria-hidden="true"
+                            className="h-5 w-5 flex-shrink-0"
+                          />
+                          <span className="sr-only">Home</span>
+                        </a>
+                      </div>
+                    </li>
+                    {pages.map((page) => (
+                      <li key={page.name}>
+                        <div className="flex items-center">
+                          <ChevronRightIcon
+                            aria-hidden="true"
+                            className="h-5 w-5 flex-shrink-0 text-gray-400"
+                          />
+                          <a
+                            href={page.href}
+                            aria-current={page.current ? "page" : undefined}
+                            className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+                          >
+                            {page.name}
+                          </a>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </nav>
+                <div className="flex gap-6 flex-row items-start h-fit">
+                  <button className="text-xl">
+                    <HiOutlineDotsHorizontal />
+                  </button>
+                  <button className="text-xl">
+                    <CiShare1 />
+                  </button>
+                  <button className="text-xl">
+                    <CiStar />
+                  </button>
+                  <button className="text-xl">
+                    <RxCross1 />
+                  </button>
+                </div>
+              </div>
               <div className="col-span-8"></div>
               <div className="grid col-span-4 grid-cols-12 ">
-                <div className="col-span-10 flex flex-col gap-4">
-                  <div className="flex flex-row justify-between">
+                <div className="col-span-10 flex flex-col gap-4 border border-t-0 max-h-[768px] overflow-y-auto">
+                  <div className="flex flex-row justify-between p-4 border-b">
                     <h2>Activity</h2>
                     <div className="flex flex-row gap-4">
-                      <button>
+                      <button className="text-xl">
                         <IoFilterOutline />
                       </button>
 
-                      <button>
+                      <button className="text-xl">
                         <IoIosSearch />
                       </button>
                     </div>
                   </div>
-                  <ul role="list" className="-mb-8">
+                  <ul role="list" className="-mb-8 p-3">
                     {activity.map((activityItem, activityItemIdx) => (
                       <li key={activityItem.id}>
                         <div className="relative pb-8">
@@ -141,8 +247,8 @@ export default function Detail({ open, setOpen }) {
                     ))}
                   </ul>
                 </div>
-                <div className="col-span-2 flex justify-end">
-                  <aside class=" z-30 w-16 h-full bg-white border-l border-gray-200 border">
+                <div className="col-span-2 flex justify-center p-4">
+                  <aside class=" z-30 w-16 h-full bg-white">
                     <div class="divide-y divide-gray-100 ">
                       <ul class="space-y-2 pb-5 px-3">
                         <li>
