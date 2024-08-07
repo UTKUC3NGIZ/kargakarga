@@ -65,6 +65,16 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+const tabs = [
+  { key: "boards", label: "Boards" },
+  { key: "list", label: "List" },
+  { key: "other", label: "Other" },
+  { key: "other1", label: "Other" },
+  { key: "other2", label: "Other" },
+  { key: "other3", label: "Other" },
+  { key: "other4", label: "Other" },
+];
+
 export default function Home() {
   const [token, setToken] = useState(null);
   const router = useRouter();
@@ -845,93 +855,29 @@ export default function Home() {
             Frontend Case
           </h1>
           <span className="isolate !m-0 inline-flex rounded-md shadow-sm">
-            <button
-              type="button"
-              className={`relative inline-flex items-center rounded-l-md px-4 py-3 text-sm font-semibold ${
-                selectedTab === "boards"
-                  ? "bg-gray-50 text-[#145389]"
-                  : "bg-white text-gray-800"
-              } ring-1 ring-inset ring-gray-300`}
-              onClick={() => handleTabChange("boards")}
-            >
-              Boards
-            </button>
-            <button
-              type="button"
-              className={`relative -ml-px inline-flex items-center px-4 py-3 text-sm font-semibold hover:bg-gray-50 hover:text-black ${
-                selectedTab === "list"
-                  ? "bg-gray-50 text-[#145389]"
-                  : "bg-white text-gray-800"
-              } ring-1 ring-inset ring-gray-300`}
-              onClick={() => handleTabChange("list")}
-            >
-              List
-            </button>
-            <button
-              type="button"
-              className={`relative -ml-px inline-flex items-center px-4 py-3 text-sm font-semibold hover:bg-gray-50 hover:text-black ${
-                selectedTab === "other"
-                  ? "bg-gray-50 text-[#145389]"
-                  : "bg-white text-gray-800"
-              } ring-1 ring-inset ring-gray-300`}
-              onClick={() => handleTabChange("other")}
-            >
-              Other
-            </button>
-            <button
-              type="button"
-              className={`relative -ml-px inline-flex items-center px-4 py-3 text-sm font-semibold hover:bg-gray-50 hover:text-black ${
-                selectedTab === "other1"
-                  ? "bg-gray-50 text-[#145389]"
-                  : "bg-white text-gray-800"
-              } ring-1 ring-inset ring-gray-300`}
-              onClick={() => handleTabChange("other1")}
-            >
-              Other
-            </button>
-            <button
-              type="button"
-              className={`relative -ml-px inline-flex items-center px-4 py-3 text-sm font-semibold hover:bg-gray-50 hover:text-black ${
-                selectedTab === "other2"
-                  ? "bg-gray-50 text-[#145389]"
-                  : "bg-white text-gray-800"
-              } ring-1 ring-inset ring-gray-300`}
-              onClick={() => handleTabChange("other2")}
-            >
-              Other
-            </button>
-            <button
-              type="button"
-              className={`relative -ml-px inline-flex items-center px-4 py-3 text-sm font-semibold hover:bg-gray-50 hover:text-black ${
-                selectedTab === "other3"
-                  ? "bg-gray-50 text-[#145389]"
-                  : "bg-white text-gray-800"
-              } ring-1 ring-inset ring-gray-300`}
-              onClick={() => handleTabChange("other3")}
-            >
-              Other
-            </button>
-            <button
-              type="button"
-              className={`relative inline-flex items-center rounded-r-md px-4 py-3 text-sm font-semibold ${
-                selectedTab === "other4"
-                  ? "bg-gray-50 text-[#145389]"
-                  : "bg-white text-gray-800"
-              } ring-1 ring-inset ring-gray-300`}
-              onClick={() => handleTabChange("other4")}
-            >
-              Other
-            </button>
-            {/* Add more buttons as needed */}
+            {tabs.map((tab) => (
+              <button
+                key={tab.key}
+                type="button"
+                className={`relative inline-flex items-center px-4 py-3 text-sm font-semibold ${
+                  selectedTab === tab.key
+                    ? "bg-gray-50 text-[#145389]"
+                    : "bg-white text-gray-800"
+                } ring-1 ring-inset ring-gray-300 ${
+                  tab.key === "boards" ? "rounded-l-md" : ""
+                } ${tab.key === "other4" ? "rounded-r-md" : ""}`}
+                onClick={() => handleTabChange(tab.key)}
+              >
+                {tab.label}
+              </button>
+            ))}
           </span>
-          {/* Render different components or content based on the selected tab */}
-          {selectedTab === "boards" && <Dnd setOpen={setOpenModal} />}
-          {selectedTab === "list" && <Dnd setOpen={setOpenModal} />}
-          {selectedTab === "other" && <Dnd setOpen={setOpenModal} />}
-          {selectedTab === "other1" && <Dnd setOpen={setOpenModal} />}
-          {selectedTab === "other2" && <Dnd setOpen={setOpenModal} />}
-          {selectedTab === "other3" && <Dnd setOpen={setOpenModal} />}
-          {selectedTab === "other4" && <Dnd setOpen={setOpenModal} />}
+          {tabs.map(
+            (tab) =>
+              selectedTab === tab.key && (
+                <Dnd key={tab.key} setOpen={setOpenModal} />
+              )
+          )}
         </main>
         <Detail open={openModal} setOpen={setOpenModal} />
       </main>
