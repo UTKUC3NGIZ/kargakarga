@@ -77,7 +77,7 @@ export default function Detail({ open, setOpen }) {
               <div className="col-span-12"></div>
               <div className="col-span-8"></div>
               <div className="grid col-span-4 grid-cols-12 ">
-                <div className="flow-root col-span-11">
+                <div className="col-span-10 flex justify-end">
                   <ul role="list" className="-mb-8">
                     {activity.map((activityItem, activityItemIdx) => (
                       <li key={activityItem.id}>
@@ -127,16 +127,16 @@ export default function Detail({ open, setOpen }) {
                     ))}
                   </ul>
                 </div>
-                <div className="col-span-1 flex justify-end">
-                  <aside class=" z-30 w-16 h-full bg-white border-l border-gray-200 dark:bg-gray-800 dark:border-gray-700 pt-14">
-                    <div class="divide-y divide-gray-100 dark:divide-gray-700">
-                      <ul class="space-y-2 py-5 px-3">
+                <div className="col-span-2 flex justify-end">
+                  <aside class=" z-30 w-16 h-full bg-white border-l border-gray-200 border">
+                    <div class="divide-y divide-gray-100 ">
+                      <ul class="space-y-2 pb-5 px-3">
                         <li>
                           <a
                             href="#"
                             data-tooltip-target="calendar-tooltip"
                             data-tooltip-placement="left"
-                            class="flex items-center p-2 text-gray-500 rounded-lg transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            class="flex items-center p-2 text-gray-500 rounded-lg transition duration-75  hover:text-gray-900  hover:bg-gray-100 "
                           >
                             <svg
                               class="h-6 w-6"
@@ -167,7 +167,7 @@ export default function Detail({ open, setOpen }) {
                             href="#"
                             data-tooltip-target="tooltip-notes"
                             data-tooltip-placement="left"
-                            class="flex items-center p-2 text-gray-500 rounded-lg transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            class="flex items-center p-2 text-gray-500 rounded-lg transition duration-75  hover:text-gray-900  hover:bg-gray-100 "
                           >
                             <svg
                               class="h-6 w-6"
@@ -194,7 +194,7 @@ export default function Detail({ open, setOpen }) {
                             href="#"
                             data-tooltip-target="tooltip-todo-list"
                             data-tooltip-placement="left"
-                            class="flex items-center p-2 text-gray-500 rounded-lg transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            class="flex items-center p-2 text-gray-500 rounded-lg transition duration-75  hover:text-gray-900  hover:bg-gray-100 "
                           >
                             <svg
                               class="h-6 w-6"
@@ -226,7 +226,7 @@ export default function Detail({ open, setOpen }) {
                             href="#"
                             data-tooltip-target="tooltip-users"
                             data-tooltip-placement="left"
-                            class="flex items-center p-2 text-gray-500 rounded-lg transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            class="flex items-center p-2 text-gray-500 rounded-lg transition duration-75  hover:text-gray-900  hover:bg-gray-100 "
                           >
                             <svg
                               class="h-6 w-6"
@@ -253,7 +253,7 @@ export default function Detail({ open, setOpen }) {
                             href="#"
                             data-tooltip-target="tooltip-media"
                             data-tooltip-placement="left"
-                            class="flex items-center p-2 text-gray-500 rounded-lg transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            class="flex items-center p-2 text-gray-500 rounded-lg transition duration-75  hover:text-gray-900  hover:bg-gray-100 "
                           >
                             <svg
                               class="h-6 w-6"
@@ -277,75 +277,13 @@ export default function Detail({ open, setOpen }) {
                         </li>
                       </ul>
 
-                      <ul class="space-y-2 py-5 px-3">
-                        <li>
-                          <a
-                            href="#"
-                            data-tooltip-target="tooltip-stats"
-                            data-tooltip-placement="left"
-                            class="flex items-center p-2 text-gray-500 rounded-lg transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-                          >
-                            <svg
-                              class="h-6 w-6"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                              aria-hidden="true"
-                            >
-                              <path
-                                clip-rule="evenodd"
-                                fill-rule="evenodd"
-                                d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11 4a1 1 0 10-2 0v4a1 1 0 102 0V7zm-3 1a1 1 0 10-2 0v3a1 1 0 102 0V8zM8 9a1 1 0 00-2 0v2a1 1 0 102 0V9z"
-                              ></path>
-                            </svg>
-                            <span class="sr-only"></span>
-                          </a>
-                          <div
-                            id="tooltip-stats"
-                            role="tooltip"
-                            class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip"
-                          >
-                            Statistics
-                            <div class="tooltip-arrow" data-popper-arrow></div>
-                          </div>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            data-tooltip-target="tooltip-location"
-                            data-tooltip-placement="left"
-                            class="flex items-center p-2 text-gray-500 rounded-lg transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-                          >
-                            <svg
-                              class="w-6 h-6"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                              aria-hidden="true"
-                            >
-                              <path
-                                clip-rule="evenodd"
-                                fill-rule="evenodd"
-                                d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                              ></path>
-                            </svg>
-                            <span class="sr-only"></span>
-                          </a>
-                          <div
-                            id="tooltip-location"
-                            role="tooltip"
-                            class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip"
-                          >
-                            Locations
-                            <div class="tooltip-arrow" data-popper-arrow></div>
-                          </div>
-                        </li>
+                      <ul class="space-y-2 pt-5 px-3">
                         <li>
                           <a
                             href="#"
                             data-tooltip-target="tooltip-new"
                             data-tooltip-placement="left"
-                            class="flex items-center p-2 text-gray-500 rounded-lg transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            class="flex items-center p-2 text-gray-500 rounded-lg transition duration-75  hover:text-gray-900  hover:bg-gray-100 "
                           >
                             <svg
                               class="h-6 w-6"
