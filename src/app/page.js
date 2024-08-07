@@ -7,7 +7,6 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
-import { UsersIcon } from "@heroicons/react/24/outline";
 import Dnd from "@/components/dnd.js";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -71,7 +70,8 @@ export default function Home() {
   const router = useRouter();
   const [profile, setProfile] = useState({});
   const [openModal, setOpenModal] = useState(false);
-
+  const [leftBar, setLeftBar] = useState(true);
+  console.log(leftBar);
   useEffect(() => {
     const userToken = JSON.parse(localStorage.getItem("userToken"));
     setToken(userToken);
@@ -487,7 +487,9 @@ export default function Home() {
 
       <aside
         id="sidebar-double"
-        className="flex z-40 fixed top-[3.5rem] left-0 h-full transition-transform -translate-x-full lg:translate-x-0"
+        className={`flex z-40 fixed top-[3.5rem] left-0 h-full -translate-x-full lg:translate-x-0 transition-all duration-700 ${
+          leftBar ? "!translate-x-0" : "!-translate-x-full left-9"
+        }`}
         aria-label="Sidebar"
       >
         <div className="overflow-y-auto z-30 py-5 px-3 w-16 h-full bg-[#363F72] border-r border-gray-200 flex justify-between flex-col">
@@ -797,7 +799,10 @@ export default function Home() {
                     {profile.email}
                   </span>
                 </div>
-                <button className="w-4 h-4 border-[2px] rounded-full border-[#475467]"></button>
+                <button
+                  className="w-4 h-4 border-[2px] rounded-full border-[#475467]"
+                  onClick={() => setLeftBar(!leftBar)}
+                ></button>
               </div>
             </li>
           </ul>
@@ -823,7 +828,11 @@ export default function Home() {
         </button>
       </aside>
 
-      <main className=" p-8 lg:ml-80 h-full space-y-4 mt-16 ">
+      <main
+        className={` p-8  h-full space-y-4 mt-16  transition-all duration-700 ${
+          leftBar ? "lg:ml-80 " : "ml-0"
+        }`}
+      >
         <h1 className="text-[22px] font-semibold text-[#145389] py-6">
           Frontend Case
         </h1>
