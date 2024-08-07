@@ -184,7 +184,7 @@ export default function Detail({ open, setOpen }) {
                   </button>
                 </div>
               </div>
-              <div className="col-span-8 p-12 pt-8">
+              <div className="col-span-8 p-12 pt-8 flex flex-col gap-14">
                 <div className="flex flex-row justify-between">
                   <div className="grid grid-cols-12 w-1/2 pt-10 items-center">
                     <span className="w-4 h-4 bg-[#8D99AE] border rounded-full block col-span-1 "></span>
@@ -199,6 +199,38 @@ export default function Detail({ open, setOpen }) {
                     </button>
                   </div>
                   <div>Date Picker</div>
+                </div>
+                <div className="flex flex-row gap-20">
+                  <div>
+                    <h2 className="uppercase text-md font-medium text-[#475467] pb-3">
+                      Task Status
+                    </h2>
+                    <span className="text-black font-medium text-md">Open</span>
+                  </div>
+                  <div>
+                    <h2 className="uppercase text-md font-medium text-[#475467] pb-3">
+                      Task Status
+                    </h2>
+                    <span className="text-black font-medium text-md">Open</span>
+                  </div>
+                  <div>
+                    <h2 className="uppercase text-md font-medium text-[#475467] pb-3">
+                      Task Status
+                    </h2>
+                    <span className="text-black font-medium text-md">Open</span>
+                  </div>
+                </div>
+                <div>
+                  <h2 className="uppercase text-md font-medium text-[#475467] pb-3">
+                    Description
+                  </h2>
+                  <p className="text-sm font-normal text-[#475467]">
+                    Görevin açıklaması: Lorem ipsum dolor sit amet, consectetur
+                    adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis
+                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                    commodo consequat.
+                  </p>
                 </div>
               </div>
               <div className="grid col-span-4 grid-cols-12 ">
@@ -215,6 +247,7 @@ export default function Detail({ open, setOpen }) {
                       </button>
                     </div>
                   </div>
+                  <div>-</div>
                   <ul role="list" className="-mb-8 p-3">
                     {activity.map((activityItem, activityItemIdx) => (
                       <li key={activityItem.id}>
