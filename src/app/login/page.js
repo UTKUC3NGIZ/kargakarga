@@ -42,7 +42,7 @@ export default function Page() {
           "userToken",
           JSON.stringify(response.data.data.token)
         );
-        router.push("/");
+        router.push("/boards");
       } else {
         toast.error(response.data.messages || "Bir hata oluştu.");
       }

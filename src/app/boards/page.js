@@ -139,7 +139,7 @@ export default function Home() {
                 ></path>
               </svg>
             </button>
-            <Link href="/" className="flex mr-4">
+            <Link href="/boards" className="flex mr-4">
               <Image
                 src="/assets/img/logo.svg"
                 width={32}
@@ -688,7 +688,7 @@ export default function Home() {
               </a>
             </li>
             <div className="pt-6">
-              <Link href={"/"}>
+              <Link href={"/boards"}>
                 <div className="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-white rounded-full ">
                   <span className="font-medium text-[#145389]">
                     {getInitials(profile.fullName)}
