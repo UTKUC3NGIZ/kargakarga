@@ -72,6 +72,8 @@ export default function Dnd() {
             endDate: task.endDate,
             flag: task.flagId,
             id: task.id.toString(),
+            code: task.code,
+            boardId: task.boardId,
             column: board.name.toLowerCase().replace(/\s+/g, ""),
           }))
         );
@@ -165,6 +167,41 @@ const Column = ({ cards, column, setCards, title, flags, id }) => {
       }
 
       setCards(copy);
+      console.log(cardToTransfer, "cardToTransfer");
+      console.log(id, "id");
+      const handleChange = async (e) => {
+        try {
+          await axios.put(
+            `https://api.management.parse25proje.link/api/tasks/${cardToTransfer.code}`,
+            {
+              name: cardToTransfer.title,
+              description: cardToTransfer.description,
+              boardId: id,
+              flagId: cardToTransfer.flag,
+              startDate: cardToTransfer.startDate,
+              endDate: cardToTransfer.endDate,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          const newCard = {
+            id: Math.floor(Math.random() * 1000).toString(),
+            name: text,
+            description: "",
+            column: column,
+          };
+
+          setCards((prev) => [...prev, newCard]);
+          setText("");
+          setAdding(false);
+        } catch (error) {
+          console.error("Görev oluşturulurken hata oluştu:", error);
+        }
+      };
+      return handleChange();
     }
   };
 
