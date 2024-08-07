@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Detail from "@/components/detail.js";
 const navigation = [
   {
     name: "Proje İsmi 1",
@@ -68,6 +69,8 @@ export default function Home() {
   const token = userToken;
   const router = useRouter();
   const [profile, setProfile] = useState({});
+  const [openModal, setOpenModal] = useState(true);
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -848,6 +851,7 @@ export default function Home() {
         </span>
         <Dnd />
       </main>
+      <Detail open={openModal} setOpen={setOpenModal} />
     </main>
   );
 }
