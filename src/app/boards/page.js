@@ -11,7 +11,7 @@ import Dnd from "@/components/dnd.js";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Detail from "@/components/detail.js";
 
 const navigation = [
@@ -68,9 +68,16 @@ function classNames(...classes) {
 export default function Home() {
   const [token, setToken] = useState(null);
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [profile, setProfile] = useState({});
   const [openModal, setOpenModal] = useState(false);
   const [leftBar, setLeftBar] = useState(false);
+
+  const selectedTab = searchParams.get("tab") || "boards";
+
+  const handleTabChange = (tab) => {
+    router.push(`/boards?tab=${tab}`);
+  };
 
   useEffect(() => {
     const userToken = JSON.parse(localStorage.getItem("userToken"));
@@ -828,59 +835,105 @@ export default function Home() {
         </button>
       </aside>
 
-      <main
-        className={` p-8  h-full space-y-4 mt-16  transition-all duration-700 ${
-          leftBar ? "ml-80 " : "ml-10"
-        }`}
-      >
-        <h1 className="text-[22px] font-semibold text-[#145389] py-6">
-          Frontend Case
-        </h1>
-        <span className="isolate !m-0 inline-flex rounded-md shadow-sm">
-          <button
-            type="button"
-            className="relative inline-flex items-center rounded-l-md bg-white px-4 py-3 text-sm font-semibold text-[#145389] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black "
-          >
-            Boards
-          </button>
-          <button
-            type="button"
-            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black "
-          >
-            List
-          </button>
-          <button
-            type="button"
-            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black "
-          >
-            Other
-          </button>
-          <button
-            type="button"
-            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black "
-          >
-            Other
-          </button>
-          <button
-            type="button"
-            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black "
-          >
-            Other
-          </button>
-          <button
-            type="button"
-            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black "
-          >
-            Other
-          </button>
-          <button
-            type="button"
-            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black "
-          >
-            Other
-          </button>
-        </span>
-        <Dnd setOpen={setOpenModal} />
+      <main className="bg-[#f1f7fe] h-screen antialiased overflow-y-hidden">
+        <main
+          className={`p-8 h-full space-y-4 mt-16 transition-all duration-700 ${
+            leftBar ? "ml-80 " : "ml-10"
+          }`}
+        >
+          <h1 className="text-[22px] font-semibold text-[#145389] py-6">
+            Frontend Case
+          </h1>
+          <span className="isolate !m-0 inline-flex rounded-md shadow-sm">
+            <button
+              type="button"
+              className={`relative inline-flex items-center rounded-l-md px-4 py-3 text-sm font-semibold ${
+                selectedTab === "boards"
+                  ? "bg-gray-50 text-[#145389]"
+                  : "bg-white text-gray-800"
+              } ring-1 ring-inset ring-gray-300`}
+              onClick={() => handleTabChange("boards")}
+            >
+              Boards
+            </button>
+            <button
+              type="button"
+              className={`relative -ml-px inline-flex items-center px-4 py-3 text-sm font-semibold hover:bg-gray-50 hover:text-black ${
+                selectedTab === "list"
+                  ? "bg-gray-50 text-[#145389]"
+                  : "bg-white text-gray-800"
+              } ring-1 ring-inset ring-gray-300`}
+              onClick={() => handleTabChange("list")}
+            >
+              List
+            </button>
+            <button
+              type="button"
+              className={`relative -ml-px inline-flex items-center px-4 py-3 text-sm font-semibold hover:bg-gray-50 hover:text-black ${
+                selectedTab === "other"
+                  ? "bg-gray-50 text-[#145389]"
+                  : "bg-white text-gray-800"
+              } ring-1 ring-inset ring-gray-300`}
+              onClick={() => handleTabChange("other")}
+            >
+              Other
+            </button>
+            <button
+              type="button"
+              className={`relative -ml-px inline-flex items-center px-4 py-3 text-sm font-semibold hover:bg-gray-50 hover:text-black ${
+                selectedTab === "other1"
+                  ? "bg-gray-50 text-[#145389]"
+                  : "bg-white text-gray-800"
+              } ring-1 ring-inset ring-gray-300`}
+              onClick={() => handleTabChange("other1")}
+            >
+              Other
+            </button>
+            <button
+              type="button"
+              className={`relative -ml-px inline-flex items-center px-4 py-3 text-sm font-semibold hover:bg-gray-50 hover:text-black ${
+                selectedTab === "other2"
+                  ? "bg-gray-50 text-[#145389]"
+                  : "bg-white text-gray-800"
+              } ring-1 ring-inset ring-gray-300`}
+              onClick={() => handleTabChange("other2")}
+            >
+              Other
+            </button>
+            <button
+              type="button"
+              className={`relative -ml-px inline-flex items-center px-4 py-3 text-sm font-semibold hover:bg-gray-50 hover:text-black ${
+                selectedTab === "other3"
+                  ? "bg-gray-50 text-[#145389]"
+                  : "bg-white text-gray-800"
+              } ring-1 ring-inset ring-gray-300`}
+              onClick={() => handleTabChange("other3")}
+            >
+              Other
+            </button>
+            <button
+              type="button"
+              className={`relative inline-flex items-center rounded-r-md px-4 py-3 text-sm font-semibold ${
+                selectedTab === "other4"
+                  ? "bg-gray-50 text-[#145389]"
+                  : "bg-white text-gray-800"
+              } ring-1 ring-inset ring-gray-300`}
+              onClick={() => handleTabChange("other4")}
+            >
+              Other
+            </button>
+            {/* Add more buttons as needed */}
+          </span>
+          {/* Render different components or content based on the selected tab */}
+          {selectedTab === "boards" && <Dnd setOpen={setOpenModal} />}
+          {selectedTab === "list" && <Dnd setOpen={setOpenModal} />}
+          {selectedTab === "other" && <Dnd setOpen={setOpenModal} />}
+          {selectedTab === "other1" && <Dnd setOpen={setOpenModal} />}
+          {selectedTab === "other2" && <Dnd setOpen={setOpenModal} />}
+          {selectedTab === "other3" && <Dnd setOpen={setOpenModal} />}
+          {selectedTab === "other4" && <Dnd setOpen={setOpenModal} />}
+        </main>
+        <Detail open={openModal} setOpen={setOpenModal} />
       </main>
       <Detail open={openModal} setOpen={setOpenModal} />
     </main>
