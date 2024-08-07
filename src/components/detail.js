@@ -20,7 +20,13 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { CiShare1, CiStar } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import { GoPaperclip } from "react-icons/go";
-import { FaItalic, FaHeading, FaListOl, FaListUl } from "react-icons/fa";
+import {
+  FaItalic,
+  FaHeading,
+  FaListOl,
+  FaListUl,
+  FaFlag,
+} from "react-icons/fa";
 import { PiQuotesFill } from "react-icons/pi";
 import { FaImage } from "react-icons/fa6";
 
@@ -273,7 +279,16 @@ const pages = [
   { name: "Project Nero", href: "#", current: true },
 ];
 
-export default function Detail({ open, setOpen }) {
+export default function Detail({ open, setOpen, detailData }) {
+  const colorMap = {
+    1: "text-[#C80B0B]",
+    2: "text-[#F79009]",
+    3: "text-[#B3B8DB]",
+    4: "text-[#2083D7]",
+    5: "text-[#079455]",
+  };
+  console.log(detailData);
+  const flagColorClass = colorMap[detailData?.flag] || "text-black";
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-[99]">
       <DialogBackdrop
@@ -357,12 +372,11 @@ export default function Detail({ open, setOpen }) {
                   <div className="grid grid-cols-12 w-1/2 pt-10 items-center">
                     <span className="w-4 h-4 bg-[#8D99AE] border rounded-full block col-span-1 "></span>
                     <h2 className="text-2xl font-bold text-[#475467] col-span-11">
-                      Bu örnek görevdir. Örnek görevin içeriğine dair açıklama
-                      detail’da bulunmaktadır.
+                      {detailData?.title}
                     </h2>
 
                     <button className="col-span-12 pt-3 text-base font-medium text-[#98A2B3] flex flex-row items-center gap-2">
-                      ID: <span className="underline">#435365</span>
+                      ID: <span className="underline">#{detailData?.id}</span>
                       <LuCopy />
                     </button>
                   </div>
@@ -373,19 +387,23 @@ export default function Detail({ open, setOpen }) {
                     <h2 className="uppercase text-md font-medium text-[#475467] pb-3">
                       Task Status
                     </h2>
-                    <span className="text-black font-medium text-md">Open</span>
+                    <span className="text-black font-medium text-md">
+                      {detailData?.column}
+                    </span>
                   </div>
                   <div>
                     <h2 className="uppercase text-md font-medium text-[#475467] pb-3">
-                      Task Status
+                      Assingment
                     </h2>
                     <span className="text-black font-medium text-md">Open</span>
                   </div>
                   <div>
                     <h2 className="uppercase text-md font-medium text-[#475467] pb-3">
-                      Task Status
+                      Priotry
                     </h2>
-                    <span className="text-black font-medium text-md">Open</span>
+                    <span className={`text-md ${flagColorClass}`}>
+                      <FaFlag />
+                    </span>
                   </div>
                 </div>
                 <div>
@@ -393,11 +411,7 @@ export default function Detail({ open, setOpen }) {
                     Description
                   </h2>
                   <p className="text-sm font-normal text-[#475467]">
-                    Görevin açıklaması: Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                    commodo consequat.
+                    {detailData?.description}
                   </p>
                 </div>
                 <div>

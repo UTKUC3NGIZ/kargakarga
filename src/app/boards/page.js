@@ -955,10 +955,18 @@ export default function Home() {
                 )
             )}
           </main>
-          <Detail open={openModal} setOpen={setOpenModal} />
+          <Detail
+            open={openModal}
+            setOpen={setOpenModal}
+            detailData={detailData}
+          />
         </main>
 
-        <Detail open={openModal} setOpen={setOpenModal} />
+        <Detail
+          open={openModal}
+          setOpen={setOpenModal}
+          detailData={detailData}
+        />
       </main>
     </Suspense>
   );

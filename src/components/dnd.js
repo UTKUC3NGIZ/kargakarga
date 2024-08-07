@@ -119,6 +119,7 @@ export default function Dnd({ open, setOpen, dndFilter, setDetailData }) {
         addColumn={addColumn}
         setOpen={setOpen}
         open={open}
+        setDetailData={setDetailData}
       />
     </div>
   );
@@ -132,6 +133,7 @@ const Board = ({
   flags,
   setOpen,
   open,
+  setDetailData,
 }) => {
   return (
     <div className="flex w-full gap-3 p-3">
@@ -150,6 +152,7 @@ const Board = ({
           id={col.id}
           setOpen={setOpen}
           open={open}
+          setDetailData={setDetailData}
         />
       ))}
       <AddColumn addColumn={addColumn} />
@@ -166,6 +169,7 @@ const Column = ({
   id,
   setOpen,
   open,
+  setDetailData,
 }) => {
   const [active, setActive] = useState(false);
 
@@ -347,6 +351,7 @@ const Column = ({
                 flags={flags}
                 setOpen={setOpen}
                 open={open}
+                setDetailData={setDetailData}
               />
             ))}
             <AddCard column={column} setCards={setCards} id={id} />
@@ -377,7 +382,7 @@ const Card = ({
   flags,
   flag,
   setOpen,
-  open,
+  setDetailData,
 }) => {
   const formattedStartDate = startDate ? formatDate(startDate) : "";
   const formattedEndDate = endDate ? formatDate(endDate) : "";
@@ -394,7 +399,18 @@ const Card = ({
         layoutId={id}
         draggable="true"
         onDragStart={(e) => handleDragStart(e, { description, id, column })}
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          setOpen(true);
+          setDetailData({
+            description,
+            id,
+            column,
+            title,
+            startDate,
+            endDate,
+            flag,
+          });
+        }}
         className="cursor-grab rounded h-auto border border-white-700 bg-white-800 p-3 active:cursor-grabbing shadow-sm"
       >
         <h2 className="text-orange-500">{title}</h2>
