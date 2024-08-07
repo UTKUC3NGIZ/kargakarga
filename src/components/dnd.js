@@ -306,7 +306,7 @@ const Column = ({
       <div className="flex items-center justify-between px-4 pb-3 pt-4 mb-1 border-b shadow-sm">
         <div className="flex flex-row gap-2 text-center justify-center items-center ">
           <h3 className={`text-[#4E5BA6] text-base font-normal`}>{title}</h3>
-          <div className="w-5 h-5 text-[#175CD3] border-[#B2DDFF] bg-[#eff7fe] rounded-full border   text-xs flex items-center justify-center">
+          <div className="w-5 h-5 text-[#175CD3] border-[#B2DDFF] bg-[#eff7fe] rounded-full border text-xs flex items-center justify-center">
             <span>{filteredCards.length}</span>
           </div>
         </div>
@@ -323,7 +323,7 @@ const Column = ({
         onDrop={handleDragEnd}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
-        className={`sm:h-[500px] h-[300px] w-full transition-colors overflow-y-auto overflow-x-hidden  ${
+        className={`sm:h-[500px] h-[300px] w-full transition-colors overflow-y-auto overflow-x-hidden ${
           active ? "bg-white opacity-80" : "bg-white"
         }`}
       >
@@ -339,18 +339,16 @@ const Column = ({
           </div>
         ) : (
           <>
-            {filteredCards.map((c) => {
-              return (
-                <Card
-                  key={c.id}
-                  {...c}
-                  handleDragStart={handleDragStart}
-                  flags={flags}
-                  setOpen={setOpen}
-                  open={open}
-                />
-              );
-            })}
+            {filteredCards.map((c) => (
+              <Card
+                key={c.id}
+                {...c}
+                handleDragStart={handleDragStart}
+                flags={flags}
+                setOpen={setOpen}
+                open={open}
+              />
+            ))}
             <AddCard column={column} setCards={setCards} id={id} />
           </>
         )}
@@ -434,7 +432,7 @@ const AddCard = ({ column, setCards, id }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(
+      const response = await axios.post(
         "https://api.management.parse25proje.link/api/tasks",
         {
           name: text,
@@ -450,11 +448,15 @@ const AddCard = ({ column, setCards, id }) => {
           },
         }
       );
+
       const newCard = {
-        id: Math.floor(Math.random() * 1000).toString(),
-        name: text,
+        id: response.data.id,
+        title: text,
         description: "",
         column: column,
+        startDate: "2024-02-15T10:00:00",
+        endDate: "2024-02-20T10:00:00",
+        flag: 3,
       };
 
       setCards((prev) => [...prev, newCard]);
@@ -484,7 +486,7 @@ const AddCard = ({ column, setCards, id }) => {
       <input
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="text-sm text-neutral-700 rounded w-full border  p-2 outline-none"
+        className="text-sm text-neutral-700 rounded w-full border p-2 outline-none"
         placeholder="New Task Name"
       />
       <div className="flex justify-end gap-2 p-1 pt-3">
