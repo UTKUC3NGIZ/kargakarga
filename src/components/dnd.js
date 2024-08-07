@@ -9,8 +9,7 @@ import { LuDiamond } from "react-icons/lu";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const userToken = JSON.parse(localStorage.getItem("userToken"));
-const token = userToken;
+let token = null;
 
 const fetchBoards = async () => {
   try {
@@ -52,6 +51,8 @@ export default function Dnd({ open, setOpen }) {
   const [flags, setFlags] = useState([]);
 
   useEffect(() => {
+    token = JSON.parse(localStorage.getItem("userToken"));
+
     const initializeData = async () => {
       const [boardData, flagData] = await Promise.all([
         fetchBoards(),

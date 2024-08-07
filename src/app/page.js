@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Detail from "@/components/detail.js";
+
 const navigation = [
   {
     name: "Proje İsmi 1",
@@ -60,19 +61,26 @@ const navigation = [
     ],
   },
 ];
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Home() {
-  const userToken = JSON.parse(localStorage.getItem("userToken"));
-  const token = userToken;
+  const [token, setToken] = useState(null);
   const router = useRouter();
   const [profile, setProfile] = useState({});
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
+    const userToken = JSON.parse(localStorage.getItem("userToken"));
+    setToken(userToken);
+  }, []);
+
+  useEffect(() => {
     const fetchProfile = async () => {
+      if (!token) return;
+
       try {
         const response = await axios.get(
           "https://api.management.parse25proje.link/api/auth/profile",
@@ -94,7 +102,8 @@ export default function Home() {
     };
 
     fetchProfile();
-  }, []);
+  }, [token]);
+
   const getInitials = (fullName) => {
     if (!fullName) return "";
 
