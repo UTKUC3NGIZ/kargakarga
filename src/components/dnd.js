@@ -287,7 +287,7 @@ const Column = ({
 
   return (
     <div className="w-80 shrink-0 border rounded-t-lg rounded-b-lg bg-white px-1">
-      <div className="mb-3 flex items-center justify-between px-4 py-5 ">
+      <div className="flex items-center justify-between px-4 pb-3 pt-4 mb-1 border-b shadow-sm">
         <div className="flex flex-row gap-2 text-center justify-center items-center ">
           <h3 className={`text-[#4E5BA6] text-base font-normal`}>{title}</h3>
           <div className="w-5 h-5 text-[#175CD3] border-[#B2DDFF] bg-[#eff7fe] rounded-full border   text-xs flex items-center justify-center">
@@ -451,35 +451,37 @@ const AddCard = ({ column, setCards, id }) => {
 
   if (!adding) {
     return (
-      <button
-        onClick={() => setAdding(true)}
-        className="m-4 flex flex-row gap-2 items-center p-1 text-[#98A2B3] hover:text-black"
-      >
-        <FiPlus />
-        <span>Add Task</span>
-      </button>
+      <div className="flex justify-center ">
+        <button
+          onClick={() => setAdding(true)}
+          className="m-4 flex flex-row gap-2 items-center p-1 text-[#98A2B3] hover:text-[#145389] "
+        >
+          <FiPlus />
+          <span>New Task</span>
+        </button>
+      </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="p-4">
+    <form onSubmit={handleSubmit} className="py-4">
       <input
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="text-sm text-neutral-700 rounded w-full border border-neutral-300 p-2 outline-none"
+        className="text-sm text-neutral-700 rounded w-full border  p-2 outline-none"
         placeholder="New Task Name"
       />
       <div className="flex justify-end gap-2 p-1 pt-3">
         <button
           type="button"
           onClick={() => setAdding(false)}
-          className="text-sm text-neutral-700 px-3 py-1 rounded hover:bg-neutral-200"
+          className="text-sm text-[#145389] px-3 py-1 rounded hover:bg-neutral-200"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="text-sm bg-[#175CD3] text-white px-3 py-1 rounded hover:bg-blue-600"
+          className="text-sm bg-[#145289c5] text-white px-3 py-1 rounded hover:bg-[#145389]"
         >
           Add
         </button>
