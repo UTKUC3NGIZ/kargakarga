@@ -5,8 +5,19 @@ import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Popover,
+  PopoverButton,
+  PopoverGroup,
+  PopoverPanel,
 } from "@headlessui/react";
-import { ChevronRightIcon } from "@heroicons/react/20/solid";
+import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import Dnd from "@/components/dnd.js";
 import { useEffect, useState, Suspense } from "react";
 import toast from "react-hot-toast";
@@ -14,7 +25,8 @@ import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import Detail from "@/components/detail.js";
 import { CiFilter } from "react-icons/ci";
-
+import {} from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 const navigation = [
   {
     name: "Proje İsmi 1",
@@ -75,6 +87,16 @@ const tabs = [
   { key: "other3", label: "Other" },
   { key: "other4", label: "Other" },
 ];
+
+const filter = {
+  id: "sizes",
+  name: "Sizes",
+  options: [
+    { value: "s", label: "S", checked: false },
+    { value: "m", label: "M", checked: false },
+    { value: "l", label: "L", checked: false },
+  ],
+};
 
 export default function Home() {
   const [token, setToken] = useState(null);
@@ -857,9 +879,42 @@ export default function Home() {
               <h1 className="text-[22px] font-semibold text-[#145389] py-6">
                 Frontend Case
               </h1>
-              <button className="text-2xl hover:text-[#145389]">
-                <CiFilter />
-              </button>
+
+              <PopoverGroup className="-mx-4 flex items-center divide-x divide-gray-200">
+                <Popover className="relative inline-block px-4 text-left">
+                  <PopoverButton className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                    <span className="text-xl">
+                      <CiFilter />
+                    </span>
+                  </PopoverButton>
+
+                  <PopoverPanel
+                    transition
+                    className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                  >
+                    <form className="space-y-4">
+                      {filter.options.map((option, optionIdx) => (
+                        <div key={option.value} className="flex items-center">
+                          <input
+                            defaultValue={option.value}
+                            defaultChecked={option.checked}
+                            id={`filter-${filter.id}-${optionIdx}`}
+                            name={`${filter.id}[]`}
+                            type="checkbox"
+                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                          />
+                          <label
+                            htmlFor={`filter-${filter.id}-${optionIdx}`}
+                            className="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900"
+                          >
+                            {option.label}
+                          </label>
+                        </div>
+                      ))}
+                    </form>
+                  </PopoverPanel>
+                </Popover>
+              </PopoverGroup>
             </div>
             <span className="isolate !m-0 inline-flex rounded-md shadow-sm">
               {tabs.map((tab) => (
