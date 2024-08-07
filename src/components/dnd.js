@@ -91,6 +91,14 @@ export default function Dnd({ open, setOpen, setDndFilter, dndFilter }) {
   }, []);
 
   const getFilteredCards = () => {
+    const anyFilterTrue = Object.values(dndFilter).some(
+      (value) => value === true
+    );
+
+    if (!anyFilterTrue) {
+      return cards;
+    }
+
     return cards.filter((card) => dndFilter[card.flag]);
   };
 
@@ -115,6 +123,7 @@ export default function Dnd({ open, setOpen, setDndFilter, dndFilter }) {
     </div>
   );
 }
+
 const Board = ({
   cards,
   columns,
