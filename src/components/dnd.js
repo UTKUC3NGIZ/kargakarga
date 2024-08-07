@@ -312,7 +312,7 @@ const Column = ({
         }`}
       >
         {filteredCards.length === 0 ? (
-          <div className="flex justify-center flex-col items-center h-[490px] group/item">
+          <div className="flex justify-center flex-col items-center sm:h-[490px] h-[290px]  group/item">
             <img
               src="/assets/img/kargakargaBoard.png"
               alt="No cards available"
