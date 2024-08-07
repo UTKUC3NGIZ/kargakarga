@@ -70,8 +70,8 @@ export default function Home() {
   const router = useRouter();
   const [profile, setProfile] = useState({});
   const [openModal, setOpenModal] = useState(false);
-  const [leftBar, setLeftBar] = useState(true);
-  console.log(leftBar);
+  const [leftBar, setLeftBar] = useState(false);
+
   useEffect(() => {
     const userToken = JSON.parse(localStorage.getItem("userToken"));
     setToken(userToken);
@@ -698,7 +698,7 @@ export default function Home() {
             </div>
           </ul>
         </div>
-        <nav className="overflow-y-auto py-5 px-4 w-64 h-full bg-white border-r border-gray-200 transition-transform left-0 top-0 transform-none">
+        <nav className="overflow-y-auto py-5 px-4 w-64 h-full bg-white border-r border-gray-200 transition-transform left-0 top-0 transform-none overflow-x-hidden">
           <ul role="list" className="flex flex-1 flex-col gap-y-7 h-full">
             <li>
               <h2 className="text-base font-medium py-4">Projeler</h2>
@@ -827,7 +827,7 @@ export default function Home() {
 
       <main
         className={` p-8  h-full space-y-4 mt-16  transition-all duration-700 ${
-          leftBar ? "lg:ml-80 " : "ml-0"
+          leftBar ? "ml-80 " : "ml-10"
         }`}
       >
         <h1 className="text-[22px] font-semibold text-[#145389] py-6">
