@@ -9,7 +9,7 @@ import {
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { UsersIcon } from "@heroicons/react/24/outline";
 import Dnd from "@/components/dnd.js";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -67,6 +67,7 @@ export default function Home() {
   const userToken = JSON.parse(localStorage.getItem("userToken"));
   const token = userToken;
   const router = useRouter();
+  const [profile, setProfile] = useState({});
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -80,6 +81,8 @@ export default function Home() {
         );
         if (response.data.status === false) {
           router.push("/login");
+        } else {
+          setProfile(response.data.data);
         }
       } catch (error) {
         router.push("/login");
@@ -89,6 +92,14 @@ export default function Home() {
 
     fetchProfile();
   }, []);
+  const getInitials = (fullName) => {
+    if (!fullName) return "";
+
+    const names = fullName.split(" ");
+    const initials = names.map((name) => name[0].toUpperCase()).join("");
+    return initials;
+  };
+
   return (
     <main className="bg-[#f1f7fe] h-screen  antialiased overflow-y-hidden">
       <nav className="bg-white border-b border-gray-200 px-4 py-2.5 fixed left-0 right-0 top-0 z-50">
@@ -663,11 +674,13 @@ export default function Home() {
               </a>
             </li>
             <div className="pt-6">
-              <div className="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                <span className="font-medium text-gray-600 dark:text-gray-300">
-                  JL
-                </span>
-              </div>
+              <Link href={"/"}>
+                <div className="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-white rounded-full ">
+                  <span className="font-medium text-[#145389]">
+                    {getInitials(profile.fullName)}
+                  </span>
+                </div>
+              </Link>
             </div>
           </ul>
         </div>
@@ -753,10 +766,10 @@ export default function Home() {
               <div className="flex items-center gap-x-4 px-6 justify-between  text-sm font-semibold leading-6 text-gray-900 mb-10">
                 <div className="flex flex-col">
                   <span className="text-[#101828] font-semibold text-sm">
-                    Utku Cengiz
+                    {profile.fullName}
                   </span>
                   <span className="text-sm text-[#475467] font-normal ">
-                    utkucengiz00@gmail.com
+                    {profile.email}
                   </span>
                 </div>
                 <button className="w-4 h-4 border-[2px] rounded-full border-[#475467]"></button>
