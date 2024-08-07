@@ -347,7 +347,7 @@ export default function Detail({ open, setOpen }) {
                   <button className="text-xl">
                     <CiStar />
                   </button>
-                  <button className="text-xl">
+                  <button className="text-xl" onClick={() => setOpen(false)}>
                     <RxCross1 />
                   </button>
                 </div>

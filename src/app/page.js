@@ -849,7 +849,7 @@ export default function Home() {
             Other
           </button>
         </span>
-        <Dnd />
+        <Dnd setOpen={setOpenModal} />
       </main>
       <Detail open={openModal} setOpen={setOpenModal} />
     </main>

@@ -46,7 +46,7 @@ const fetchFlags = async () => {
   }
 };
 
-export default function Dnd() {
+export default function Dnd({ open, setOpen }) {
   const [cards, setCards] = useState([]);
   const [columns, setColumns] = useState([]);
   const [flags, setFlags] = useState([]);
@@ -100,12 +100,22 @@ export default function Dnd() {
         columns={columns}
         setCards={setCards}
         addColumn={addColumn}
+        setOpen={setOpen}
+        open={open}
       />
     </div>
   );
 }
 
-const Board = ({ cards, columns, setCards, addColumn, flags }) => {
+const Board = ({
+  cards,
+  columns,
+  setCards,
+  addColumn,
+  flags,
+  setOpen,
+  open,
+}) => {
   return (
     <div className="flex w-full gap-3 p-3">
       {columns.map((col) => (
@@ -121,6 +131,8 @@ const Board = ({ cards, columns, setCards, addColumn, flags }) => {
           setCards={setCards}
           flags={flags}
           id={col.id}
+          setOpen={setOpen}
+          open={open}
         />
       ))}
       <AddColumn addColumn={addColumn} />
@@ -128,7 +140,16 @@ const Board = ({ cards, columns, setCards, addColumn, flags }) => {
   );
 };
 
-const Column = ({ cards, column, setCards, title, flags, id }) => {
+const Column = ({
+  cards,
+  column,
+  setCards,
+  title,
+  flags,
+  id,
+  setOpen,
+  open,
+}) => {
   const [active, setActive] = useState(false);
 
   const handleDragStart = (e, card) => {
@@ -167,8 +188,6 @@ const Column = ({ cards, column, setCards, title, flags, id }) => {
       }
 
       setCards(copy);
-      console.log(cardToTransfer, "cardToTransfer");
-      console.log(id, "id");
       const handleChange = async (e) => {
         try {
           await axios.put(
@@ -310,6 +329,8 @@ const Column = ({ cards, column, setCards, title, flags, id }) => {
                   {...c}
                   handleDragStart={handleDragStart}
                   flags={flags}
+                  setOpen={setOpen}
+                  open={open}
                 />
               );
             })}
@@ -340,6 +361,8 @@ const Card = ({
   endDate,
   flags,
   flag,
+  setOpen,
+  open,
 }) => {
   const formattedStartDate = startDate ? formatDate(startDate) : "";
   const formattedEndDate = endDate ? formatDate(endDate) : "";
@@ -356,6 +379,7 @@ const Card = ({
         layoutId={id}
         draggable="true"
         onDragStart={(e) => handleDragStart(e, { description, id, column })}
+        onClick={() => setOpen(true)}
         className="cursor-grab rounded h-auto border border-white-700 bg-white-800 p-3 active:cursor-grabbing shadow-sm"
       >
         <h2 className="text-orange-500">{title}</h2>
