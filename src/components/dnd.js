@@ -49,6 +49,8 @@ export default function Dnd({ open, setOpen }) {
   const [cards, setCards] = useState([]);
   const [columns, setColumns] = useState([]);
   const [flags, setFlags] = useState([]);
+  console.log(cards, "cards");
+  console.log(columns, "columns");
   useEffect(() => {
     token = JSON.parse(localStorage.getItem("userToken"));
 

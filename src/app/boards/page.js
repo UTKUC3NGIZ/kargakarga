@@ -19,6 +19,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Detail from "@/components/detail.js";
 import { CiFilter } from "react-icons/ci";
 import {} from "@headlessui/react";
+import { FaFlag } from "react-icons/fa";
 const navigation = [
   {
     name: "Proje İsmi 1",
@@ -84,9 +85,11 @@ const filter = {
   id: "sizes",
   name: "Sizes",
   options: [
-    { value: "s", label: "S", checked: false },
-    { value: "m", label: "M", checked: false },
-    { value: "l", label: "L", checked: false },
+    { value: "1", color: "text-[#C80B0B]", checked: false },
+    { value: "2", color: "text-[#F79009]", checked: false },
+    { value: "3", color: "text-[#B3B8DB]", checked: false },
+    { value: "4", color: "text-[#2083D7]", checked: false },
+    { value: "5", color: "text-[#079455]", checked: false },
   ],
 };
 
@@ -97,7 +100,8 @@ export default function Home() {
   const [profile, setProfile] = useState({});
   const [openModal, setOpenModal] = useState(false);
   const [leftBar, setLeftBar] = useState(false);
-
+  const [dndFilter, setDndFilter] = useState(false);
+  console.log(dndFilter, "dndFilter");
   const selectedTab = searchParams.get("tab") || "boards";
 
   const handleTabChange = (tab) => {
@@ -899,7 +903,7 @@ export default function Home() {
                             htmlFor={`filter-${filter.id}-${optionIdx}`}
                             className="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900"
                           >
-                            {option.label}
+                            <FaFlag className={option.color} />
                           </label>
                         </div>
                       ))}
@@ -929,7 +933,12 @@ export default function Home() {
             {tabs.map(
               (tab) =>
                 selectedTab === tab.key && (
-                  <Dnd key={tab.key} setOpen={setOpenModal} />
+                  <Dnd
+                    key={tab.key}
+                    setOpen={setOpenModal}
+                    setDndFilter={setDndFilter}
+                    dndFilter={dndFilter}
+                  />
                 )
             )}
           </main>
