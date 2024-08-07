@@ -7,7 +7,9 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { CheckIcon } from "@heroicons/react/24/outline";
+import { IoIosSearch } from "react-icons/io";
+import { IoFilterOutline } from "react-icons/io5";
+
 import {
   ChatBubbleLeftEllipsisIcon,
   TagIcon,
@@ -77,7 +79,19 @@ export default function Detail({ open, setOpen }) {
               <div className="col-span-12"></div>
               <div className="col-span-8"></div>
               <div className="grid col-span-4 grid-cols-12 ">
-                <div className="col-span-10 flex justify-end">
+                <div className="col-span-10 flex flex-col gap-4">
+                  <div className="flex flex-row justify-between">
+                    <h2>Activity</h2>
+                    <div className="flex flex-row gap-4">
+                      <button>
+                        <IoFilterOutline />
+                      </button>
+
+                      <button>
+                        <IoIosSearch />
+                      </button>
+                    </div>
+                  </div>
                   <ul role="list" className="-mb-8">
                     {activity.map((activityItem, activityItemIdx) => (
                       <li key={activityItem.id}>
