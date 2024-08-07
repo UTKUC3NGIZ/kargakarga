@@ -466,7 +466,7 @@ const AddCard = ({ column, setCards, id }) => {
       <input
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="text-sm text-neutral-700 rounded w-full border border-neutral-300 p-2"
+        className="text-sm text-neutral-700 rounded w-full border border-neutral-300 p-2 outline-none"
         placeholder="New Task Name"
       />
       <div className="flex justify-end gap-2 p-1 pt-3">

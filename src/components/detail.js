@@ -503,7 +503,7 @@ export default function Detail({ open, setOpen }) {
                                     <textarea
                                       id="comment"
                                       rows="2"
-                                      className="px-0 w-full text-sm text-gray-900 bg-[#F9FAFB] border-0  focus:ring-0 "
+                                      className="px-0 w-full text-sm text-gray-900 bg-[#F9FAFB] border-0  outline-none "
                                       placeholder="Enter a comment..."
                                       required
                                     ></textarea>
@@ -585,7 +585,7 @@ export default function Detail({ open, setOpen }) {
                                     </div>
                                     <button
                                       type="submit"
-                                      className="inline-flex bg-[#145389] text-xl items-center p-2 font-medium text-center text-black bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200  hover:bg-primary-800"
+                                      className="inline-flex bg-[#145389] text-xl items-center p-2 font-medium text-center text-black bg-primary-700 rounded-lg outline-none  hover:bg-primary-800"
                                     >
                                       <IoSendOutline color="white" />
                                     </button>
@@ -869,15 +869,6 @@ export default function Detail({ open, setOpen }) {
                 </div>
               </div>
             </div>
-            {/* <div className="mt-5 sm:mt-6">
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Go back to dashboard
-              </button>
-            </div> */}
           </DialogPanel>
         </div>
       </div>

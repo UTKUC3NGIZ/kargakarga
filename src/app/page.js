@@ -122,7 +122,7 @@ export default function Home() {
               data-drawer-toggle="sidebar-double"
               aria-controls="sidebar-double"
               type="button"
-              className="inline-flex items-center p-2 mr-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
+              className="inline-flex items-center p-2 mr-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 outline-none "
             >
               <span className="sr-only">Open sidebar</span>
               <svg
@@ -155,7 +155,7 @@ export default function Home() {
             <button
               type="button"
               data-dropdown-toggle="notification-dropdown"
-              className="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100  focus:ring-4 sm:block hidden"
+              className="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100  outline-none sm:block hidden"
             >
               <span className="sr-only">View notifications</span>
 
@@ -177,7 +177,7 @@ export default function Home() {
             <button
               type="button"
               data-dropdown-toggle="notification-dropdown"
-              className="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100  focus:ring-4 sm:block hidden"
+              className="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100  outline-none sm:block hidden"
             >
               <span className="sr-only">View notifications</span>
               <svg
@@ -760,7 +760,7 @@ export default function Home() {
                 ))}
                 <button
                   type="button"
-                  className="inline-flex items-center gap-x-1.5 rounded-md px-2.5 py-1.5 text-sm font-normal text-[#98A2B3] hover:text-[#8f9cb3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 group"
+                  className="inline-flex items-center gap-x-1.5 rounded-md px-2.5 py-1.5 text-sm font-normal text-[#98A2B3] hover:text-[#8f9cb3] outline-none group"
                 >
                   <Image
                     src="/assets/img/wave.svg"
@@ -817,43 +817,43 @@ export default function Home() {
         <span className="isolate !m-0 inline-flex rounded-md shadow-sm">
           <button
             type="button"
-            className="relative inline-flex items-center rounded-l-md bg-white px-4 py-3 text-sm font-semibold text-[#145389] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black focus:z-10"
+            className="relative inline-flex items-center rounded-l-md bg-white px-4 py-3 text-sm font-semibold text-[#145389] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black "
           >
             Boards
           </button>
           <button
             type="button"
-            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black focus:z-10"
+            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black "
           >
             List
           </button>
           <button
             type="button"
-            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black focus:z-10"
+            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black "
           >
             Other
           </button>
           <button
             type="button"
-            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black focus:z-10"
+            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black "
           >
             Other
           </button>
           <button
             type="button"
-            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black focus:z-10"
+            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black "
           >
             Other
           </button>
           <button
             type="button"
-            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black focus:z-10"
+            className="relative -ml-px inline-flex items-center bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black "
           >
             Other
           </button>
           <button
             type="button"
-            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black focus:z-10"
+            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-4 py-3 text-sm font-semibold text-[#344054] ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-black "
           >
             Other
           </button>
