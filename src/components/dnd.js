@@ -45,20 +45,20 @@ const fetchFlags = async () => {
   }
 };
 
-export default function Dnd({ open, setOpen }) {
+export default function Dnd({ open, setOpen, setDndFilter, dndFilter }) {
   const [cards, setCards] = useState([]);
   const [columns, setColumns] = useState([]);
   const [flags, setFlags] = useState([]);
-  console.log(cards, "cards");
-  console.log(columns, "columns");
-  useEffect(() => {
-    token = JSON.parse(localStorage.getItem("userToken"));
 
+  useEffect(() => {
     const initializeData = async () => {
+      token = JSON.parse(localStorage.getItem("userToken"));
+
       const [boardData, flagData] = await Promise.all([
         fetchBoards(),
         fetchFlags(),
       ]);
+
       if (boardData && flagData) {
         const boards = boardData.data;
         const newColumns = boards.map((board) => ({
@@ -66,6 +66,7 @@ export default function Dnd({ open, setOpen }) {
           column: board.name.toLowerCase().replace(/\s+/g, ""),
           id: board.id,
         }));
+
         const newCards = boards.flatMap((board) =>
           board.tasks.map((task) => ({
             title: task.name,
@@ -79,13 +80,19 @@ export default function Dnd({ open, setOpen }) {
             column: board.name.toLowerCase().replace(/\s+/g, ""),
           }))
         );
+
         setColumns(newColumns);
         setCards(newCards);
         setFlags(flagData);
       }
     };
+
     initializeData();
   }, []);
+
+  const getFilteredCards = () => {
+    return cards.filter((card) => dndFilter[card.flag]);
+  };
 
   const addColumn = (title) => {
     const newColumn = {
@@ -97,7 +104,7 @@ export default function Dnd({ open, setOpen }) {
   return (
     <div className="h-full w-full text-neutral-50">
       <Board
-        cards={cards}
+        cards={getFilteredCards()}
         flags={flags}
         columns={columns}
         setCards={setCards}
@@ -108,7 +115,6 @@ export default function Dnd({ open, setOpen }) {
     </div>
   );
 }
-
 const Board = ({
   cards,
   columns,

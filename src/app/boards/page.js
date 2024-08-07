@@ -100,8 +100,19 @@ export default function Home() {
   const [profile, setProfile] = useState({});
   const [openModal, setOpenModal] = useState(false);
   const [leftBar, setLeftBar] = useState(false);
-  const [dndFilter, setDndFilter] = useState(false);
-  console.log(dndFilter, "dndFilter");
+  const [dndFilter, setDndFilter] = useState(
+    filter.options.reduce((acc, option) => {
+      acc[option.value] = option.checked;
+      return acc;
+    }, {})
+  );
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    setDndFilter((prevCheckedOptions) => ({
+      ...prevCheckedOptions,
+      [value]: checked,
+    }));
+  };
   const selectedTab = searchParams.get("tab") || "boards";
 
   const handleTabChange = (tab) => {
@@ -897,6 +908,7 @@ export default function Home() {
                             id={`filter-${filter.id}-${optionIdx}`}
                             name={`${filter.id}[]`}
                             type="checkbox"
+                            onChange={handleCheckboxChange}
                             className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                           />
                           <label
