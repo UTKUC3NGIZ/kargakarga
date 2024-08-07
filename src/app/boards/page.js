@@ -5,13 +5,6 @@ import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
   Popover,
   PopoverButton,
   PopoverGroup,
@@ -26,7 +19,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Detail from "@/components/detail.js";
 import { CiFilter } from "react-icons/ci";
 import {} from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 const navigation = [
   {
     name: "Proje İsmi 1",
