@@ -20,6 +20,7 @@ import {
   TagIcon,
   UserCircleIcon,
 } from "@heroicons/react/20/solid";
+import { LuCopy } from "react-icons/lu";
 
 const activity = [
   {
@@ -183,7 +184,23 @@ export default function Detail({ open, setOpen }) {
                   </button>
                 </div>
               </div>
-              <div className="col-span-8"></div>
+              <div className="col-span-8 p-12 pt-8">
+                <div className="flex flex-row justify-between">
+                  <div className="grid grid-cols-12 w-1/2 pt-10 items-center">
+                    <span className="w-4 h-4 bg-[#8D99AE] border rounded-full block col-span-1 "></span>
+                    <h2 className="text-2xl font-bold text-[#475467] col-span-11">
+                      Bu örnek görevdir. Örnek görevin içeriğine dair açıklama
+                      detail’da bulunmaktadır.
+                    </h2>
+
+                    <button className="col-span-12 pt-3 text-base font-medium text-[#98A2B3] flex flex-row items-center gap-2">
+                      ID: <span className="underline">#435365</span>
+                      <LuCopy />
+                    </button>
+                  </div>
+                  <div>Date Picker</div>
+                </div>
+              </div>
               <div className="grid col-span-4 grid-cols-12 ">
                 <div className="col-span-10 flex flex-col gap-4 border border-t-0 max-h-[768px] overflow-y-auto">
                   <div className="flex flex-row justify-between p-4 border-b">
