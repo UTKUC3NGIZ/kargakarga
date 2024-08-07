@@ -8,7 +8,7 @@ import {
 } from "@headlessui/react";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import Dnd from "@/components/dnd.js";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -844,43 +844,44 @@ export default function Home() {
           </svg>
         </button>
       </aside>
-
-      <main className="bg-[#f1f7fe] h-screen antialiased overflow-y-hidden">
-        <main
-          className={`p-8 h-full space-y-4 mt-16 transition-all duration-700 ${
-            leftBar ? "ml-80 " : "ml-10"
-          }`}
-        >
-          <h1 className="text-[22px] font-semibold text-[#145389] py-6">
-            Frontend Case
-          </h1>
-          <span className="isolate !m-0 inline-flex rounded-md shadow-sm">
-            {tabs.map((tab) => (
-              <button
-                key={tab.key}
-                type="button"
-                className={`relative inline-flex items-center px-4 py-3 text-sm font-semibold ${
-                  selectedTab === tab.key
-                    ? "bg-gray-50 text-[#145389]"
-                    : "bg-white text-gray-800"
-                } ring-1 ring-inset ring-gray-300 ${
-                  tab.key === "boards" ? "rounded-l-md" : ""
-                } ${tab.key === "other4" ? "rounded-r-md" : ""}`}
-                onClick={() => handleTabChange(tab.key)}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </span>
-          {tabs.map(
-            (tab) =>
-              selectedTab === tab.key && (
-                <Dnd key={tab.key} setOpen={setOpenModal} />
-              )
-          )}
+      <Suspense fallback={<div>Loading...</div>}>
+        <main className="bg-[#f1f7fe] h-screen antialiased overflow-y-hidden">
+          <main
+            className={`p-8 h-full space-y-4 mt-16 transition-all duration-700 ${
+              leftBar ? "ml-80 " : "ml-10"
+            }`}
+          >
+            <h1 className="text-[22px] font-semibold text-[#145389] py-6">
+              Frontend Case
+            </h1>
+            <span className="isolate !m-0 inline-flex rounded-md shadow-sm">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.key}
+                  type="button"
+                  className={`relative inline-flex items-center px-4 py-3 text-sm font-semibold ${
+                    selectedTab === tab.key
+                      ? "bg-gray-50 text-[#145389]"
+                      : "bg-white text-gray-800"
+                  } ring-1 ring-inset ring-gray-300 ${
+                    tab.key === "boards" ? "rounded-l-md" : ""
+                  } ${tab.key === "other4" ? "rounded-r-md" : ""}`}
+                  onClick={() => handleTabChange(tab.key)}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </span>
+            {tabs.map(
+              (tab) =>
+                selectedTab === tab.key && (
+                  <Dnd key={tab.key} setOpen={setOpenModal} />
+                )
+            )}
+          </main>
+          <Detail open={openModal} setOpen={setOpenModal} />
         </main>
-        <Detail open={openModal} setOpen={setOpenModal} />
-      </main>
+      </Suspense>
       <Detail open={openModal} setOpen={setOpenModal} />
     </main>
   );
