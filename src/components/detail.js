@@ -291,7 +291,7 @@ const pages = [
   { name: "Frontend Case", href: "#", current: true },
 ];
 
-const buttonData = [
+const flags = [
   { id: "1", color: "text-[#C80B0B]" },
   { id: "2", color: "text-[#F79009]" },
   { id: "3", color: "text-[#B3B8DB]" },
@@ -300,15 +300,6 @@ const buttonData = [
 ];
 
 export default function Detail({ open, setOpen, detailData, token }) {
-  const colorMap = {
-    1: "text-[#C80B0B]",
-    2: "text-[#F79009]",
-    3: "text-[#B3B8DB]",
-    4: "text-[#2083D7]",
-    5: "text-[#079455]",
-  };
-  const flagColorClass = colorMap[detailData?.flag] || "text-black";
-
   const deleteTask = async (code) => {
     try {
       await axios.delete(
@@ -356,7 +347,8 @@ export default function Detail({ open, setOpen, detailData, token }) {
     endDate: detailData?.endDate,
   });
   const [editData, setEditData] = useState({});
-  const [selected, setSelected] = useState(buttonData[0]);
+  const [selected, setSelected] = useState(flags[0]);
+
   useEffect(() => {
     if (detailData) {
       setDates({
@@ -365,7 +357,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
       });
       setEditData(detailData);
 
-      const selectedFlag = buttonData.find(
+      const selectedFlag = flags.find(
         (button) => button.id === detailData.flag?.toString()
       );
       if (selectedFlag) {
@@ -406,7 +398,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
   };
 
   const handleRadioChange = (value) => {
-    const selectedFlag = buttonData.find((button) => button.id === value);
+    const selectedFlag = flags.find((flag) => flag.id === value);
     if (selectedFlag) {
       setSelected(selectedFlag);
       setEditData((prevData) => ({
@@ -592,16 +584,12 @@ export default function Detail({ open, setOpen, detailData, token }) {
                     <h2 className="uppercase sm:text-md text-sm font-medium text-[#475467] pb-3">
                       Priotry
                     </h2>
-                    <span className={`text-md ${flagColorClass}`}>
+                    <span className={`text-md ${selected.color}`}>
                       <PopoverGroup className="-mx-4 flex items-center divide-x divide-gray-200">
                         <Popover className="relative inline-block px-4 text-left">
                           <PopoverButton className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
                             <span className="text-xl">
-                              <FaFlag
-                                className={`text-md ${
-                                  colorMap[selected?.id] || "text-black"
-                                }`}
-                              />
+                              <FaFlag className={`text-md ${selected.color}`} />
                             </span>
                           </PopoverButton>
 
@@ -610,12 +598,12 @@ export default function Detail({ open, setOpen, detailData, token }) {
                             className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
                           >
                             <RadioGroup
-                              value={selected?.id}
+                              value={selected.id}
                               onChange={handleRadioChange}
                               aria-label="Flag selection"
                               className="space-y-2"
                             >
-                              {buttonData.map((flag) => (
+                              {flags.map((flag) => (
                                 <Radio
                                   key={flag.id}
                                   value={flag.id}
