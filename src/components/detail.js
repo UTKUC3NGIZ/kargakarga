@@ -421,8 +421,8 @@ export default function Detail({ open, setOpen, detailData, token }) {
                   </button>
                 </div>
               </div>
-              <div className="col-span-8 p-12 pt-8 flex flex-col gap-14">
-                <div className="flex flex-row justify-between">
+              <div className="col-span-8 p-12 pt-8 flex flex-col gap-3">
+                <div className="flex flex-row justify-between pb-9">
                   <div className="grid grid-cols-12 w-1/2 pt-10 items-center">
                     <button>
                       <div className="bg-[#8D99AE] rounded-full w-7 h-7 flex justify-center items-center border-2">
