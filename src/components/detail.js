@@ -23,7 +23,7 @@ import { IoFilterOutline, IoSendOutline } from "react-icons/io5";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { CiFilter, CiShare1, CiStar } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
-import { GoPaperclip } from "react-icons/go";
+import { GoPaperclip, GoPlus } from "react-icons/go";
 import {
   FaItalic,
   FaHeading,
@@ -409,7 +409,11 @@ export default function Detail({ open, setOpen, detailData, token }) {
               <div className="col-span-8 p-12 pt-8 flex flex-col gap-14">
                 <div className="flex flex-row justify-between">
                   <div className="grid grid-cols-12 w-1/2 pt-10 items-center">
-                    <span className="w-4 h-4 bg-[#8D99AE] border rounded-full block col-span-1 "></span>
+                    <button>
+                      <div className="bg-[#8D99AE] rounded-full w-7 h-7 flex justify-center items-center border-2">
+                        <span className="w-4 h-4 bg-[#8D99AE] border rounded-full block col-span-1 ring-2 ring-white"></span>
+                      </div>
+                    </button>
                     <h2 className="text-2xl font-bold text-[#475467] col-span-11">
                       {detailData?.title}
                     </h2>
@@ -426,7 +430,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
                     <h2 className="uppercase text-md font-medium text-[#475467] pb-3">
                       Task Status
                     </h2>
-                    <span className="text-black font-medium text-md">
+                    <span className="text-black font-medium text-md capitalize">
                       {detailData?.column}
                     </span>
                   </div>
@@ -434,7 +438,31 @@ export default function Detail({ open, setOpen, detailData, token }) {
                     <h2 className="uppercase text-md font-medium text-[#475467] pb-3">
                       Assingment
                     </h2>
-                    <span className="text-black font-medium text-md">Open</span>
+                    <span className="text-black font-medium text-md flex flex-row gap-2">
+                      <div className="flex -space-x-2 overflow-hidden">
+                        <img
+                          alt=""
+                          src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          className="inline-block h-10 w-10 rounded-full ring-2 ring-white"
+                        />
+                        <img
+                          alt=""
+                          src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          className="inline-block h-10 w-10 rounded-full ring-2 ring-white"
+                        />
+                        <img
+                          alt=""
+                          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+                          className="inline-block h-10 w-10 rounded-full ring-2 ring-white"
+                        />
+                        <div className="flex justify-center items-center h-10 w-10 rounded-full ring-2 ring-white text-[#475467] bg-gray-200 font-bold">
+                          <span>+5</span>
+                        </div>
+                      </div>
+                      <button className="flex justify-center items-center h-10 w-10 rounded-full text-[#475467] bg-transparent border border-gray-300 font-bold border-dashed">
+                        <GoPlus />
+                      </button>
+                    </span>
                   </div>
                   <div>
                     <h2 className="uppercase text-md font-medium text-[#475467] pb-3">
