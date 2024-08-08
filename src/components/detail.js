@@ -33,6 +33,8 @@ import {
 } from "react-icons/fa";
 import { PiQuotesFill } from "react-icons/pi";
 import { FaImage } from "react-icons/fa6";
+import { RiHome6Line } from "react-icons/ri";
+import { BiCommentDetail } from "react-icons/bi";
 
 import {
   ChatBubbleLeftEllipsisIcon,
@@ -41,7 +43,6 @@ import {
 } from "@heroicons/react/20/solid";
 import { LuCopy } from "react-icons/lu";
 import axios from "axios";
-import { useState } from "react";
 
 const activity = [
   {
@@ -281,8 +282,9 @@ const comments = [
   },
 ];
 const pages = [
+  { name: "25 Proje", href: "#", current: false },
   { name: "Projects", href: "#", current: false },
-  { name: "Project Nero", href: "#", current: true },
+  { name: "Frontend Case", href: "#", current: true },
 ];
 export default function Detail({ open, setOpen, detailData, token }) {
   const colorMap = {
@@ -307,21 +309,6 @@ export default function Detail({ open, setOpen, detailData, token }) {
     setOpen(false);
   };
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [title, setTitle] = useState("tet");
-
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
-
-  const handleBlur = () => {
-    setIsEditing(false);
-  };
-
-  const handleChange = (e) => {
-    setTitle(e.target.value);
-  };
-
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-[99]">
       <DialogBackdrop
@@ -344,30 +331,29 @@ export default function Detail({ open, setOpen, detailData, token }) {
                   className="flex flex-row items-start h-fit"
                 >
                   <div className="flex gap-3 flex-row pr-6">
-                    <button className="text-xl">
+                    <button className="text-xl text-[#475467]">
                       <IoIosArrowUp />
                     </button>
-                    <button className="text-xl">
+                    <button className="text-xl text-[#475467]">
                       <IoIosArrowDown />
                     </button>
                   </div>
                   <ol role="list" className="flex items-center space-x-4">
-                    <li>
-                      <div>
-                        <a
-                          href="#"
-                          className="text-gray-400 hover:text-gray-500"
-                        >
-                          <HomeIcon
-                            aria-hidden="true"
-                            className="h-5 w-5 flex-shrink-0"
-                          />
-                          <span className="sr-only">Home</span>
-                        </a>
-                      </div>
+                    <li className="pr-3">
+                      <a
+                        href="#"
+                        className="text-[#475467] hover:text-gray-500"
+                      >
+                        <RiHome6Line
+                          aria-hidden="true"
+                          className="h-5 w-5 flex-shrink-0"
+                        />
+
+                        <span className="sr-only">Home</span>
+                      </a>
                     </li>
                     {pages.map((page) => (
-                      <li key={page.name}>
+                      <li key={page.name} className="!m-0">
                         <div className="flex items-center">
                           <ChevronRightIcon
                             aria-hidden="true"
@@ -376,7 +362,11 @@ export default function Detail({ open, setOpen, detailData, token }) {
                           <a
                             href={page.href}
                             aria-current={page.current ? "page" : undefined}
-                            className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+                            className={`ml-3 text-sm font-medium  ${
+                              page.current
+                                ? "text-[#2083D7] hover:text-[#2082d7d3]"
+                                : "text-[#475467] hover:text-gray-700"
+                            }`}
                           >
                             {page.name}
                           </a>
@@ -430,25 +420,9 @@ export default function Detail({ open, setOpen, detailData, token }) {
                         <span className="w-4 h-4 bg-[#8D99AE] border rounded-full block col-span-1 ring-2 ring-white"></span>
                       </div>
                     </button>
-                    <div className="col-span-11">
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          value={title}
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          className="text-2xl font-bold text-[#475467] w-full"
-                          autoFocus
-                        />
-                      ) : (
-                        <h2
-                          className="text-2xl font-bold text-[#475467] cursor-pointer"
-                          onClick={handleEditClick}
-                        >
-                          {title}
-                        </h2>
-                      )}
-                    </div>
+                    <h2 className="text-2xl font-bold text-[#475467] col-span-11">
+                      {detailData?.title}
+                    </h2>
 
                     <button className="col-span-12 pt-3 text-base font-medium text-[#98A2B3] flex flex-row items-center gap-2">
                       ID: <span className="underline">#{detailData?.id}</span>
@@ -779,165 +753,81 @@ export default function Detail({ open, setOpen, detailData, token }) {
                 <div className="col-span-2 flex justify-center p-4">
                   <aside className=" z-30 w-16 h-full bg-white">
                     <div className="divide-y divide-gray-100 ">
-                      <ul className="space-y-2 pb-5 px-3">
-                        <li>
+                      <ul className="space-y-2 pb-5 px-3 gap-3 flex flex-col">
+                        <li className="flex flex-col items-center">
                           <a
                             href="#"
-                            data-tooltip-target="calendar-tooltip"
-                            data-tooltip-placement="left"
-                            className="flex items-center p-2 text-gray-500 rounded-lg transition duration-75  hover:text-gray-900  hover:bg-gray-100 "
+                            className="flex items-center flex-col justify-center "
                           >
-                            <svg
-                              className="h-6 w-6"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                              aria-hidden="true"
-                            >
-                              <path
-                                clipRule="evenodd"
-                                fillRule="evenodd"
-                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                              ></path>
-                            </svg>
-                            <span className="sr-only"></span>
+                            <span className="flex items-center justify-center p-2 text-gray-500 rounded-lg transition duration-75   hover:bg-orange-100 bg-[#FFFAEB]">
+                              <BiCommentDetail className="text-xl text-[#F79009]" />
+                            </span>
+                            <span className="text-[#F79009] text-sm pt-1">
+                              Activity
+                            </span>
                           </a>
-                          <div
-                            id="calendar-tooltip"
-                            role="tooltip"
-                            className="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip"
-                          >
-                            Calendar
-                            <div
-                              className="tooltip-arrow"
-                              data-popper-arrow
-                            ></div>
-                          </div>
                         </li>
-                        <li>
+                        <li className="flex flex-col items-center">
                           <a
                             href="#"
-                            data-tooltip-target="tooltip-notes"
-                            data-tooltip-placement="left"
-                            className="flex items-center p-2 text-gray-500 rounded-lg transition duration-75  hover:text-gray-900  hover:bg-gray-100 "
+                            className="flex items-center flex-col justify-center "
                           >
-                            <svg
-                              className="h-6 w-6"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                              aria-hidden="true"
-                            >
-                              <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z"></path>
-                            </svg>
-                            <span className="sr-only"></span>
+                            <span className="flex items-center justify-center p-2 text-gray-500 rounded-lg transition duration-75   hover:bg-gray-100 bg-[#EAECF04D]">
+                              <BiCommentDetail className="text-xl text-[#D0D5DD]" />
+                            </span>
+                            <span className="text-[#D0D5DD] text-sm pt-1">
+                              Condition
+                            </span>
                           </a>
-                          <div
-                            id="tooltip-notes"
-                            role="tooltip"
-                            className="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip"
-                          >
-                            Notes
-                            <div
-                              className="tooltip-arrow"
-                              data-popper-arrow
-                            ></div>
-                          </div>
                         </li>
-                        <li>
+                        <li className="flex flex-col items-center">
                           <a
                             href="#"
-                            data-tooltip-target="tooltip-todo-list"
-                            data-tooltip-placement="left"
-                            className="flex items-center p-2 text-gray-500 rounded-lg transition duration-75  hover:text-gray-900  hover:bg-gray-100 "
+                            className="flex items-center flex-col justify-center "
                           >
-                            <svg
-                              className="h-6 w-6"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                              aria-hidden="true"
-                            >
-                              <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                              <path
-                                clipRule="evenodd"
-                                fillRule="evenodd"
-                                d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                              ></path>
-                            </svg>
-                            <span className="sr-only"></span>
+                            <span className="flex items-center justify-center p-2 text-gray-500 rounded-lg transition duration-75   hover:bg-gray-100 bg-[#EAECF04D]">
+                              <BiCommentDetail className="text-xl text-[#D0D5DD]" />
+                            </span>
+                            <span className="text-[#D0D5DD] text-sm pt-1">
+                              QA
+                            </span>
                           </a>
-                          <div
-                            id="tooltip-todo-list"
-                            role="tooltip"
-                            className="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip whitespace-nowrap"
-                          >
-                            To-do list
-                            <div
-                              className="tooltip-arrow"
-                              data-popper-arrow
-                            ></div>
-                          </div>
                         </li>
-                        <li>
+                        <li className="flex flex-col items-center">
                           <a
                             href="#"
-                            data-tooltip-target="tooltip-users"
-                            data-tooltip-placement="left"
-                            className="flex items-center p-2 text-gray-500 rounded-lg transition duration-75  hover:text-gray-900  hover:bg-gray-100 "
+                            className="flex items-center flex-col justify-center "
                           >
-                            <svg
-                              className="h-6 w-6"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                              aria-hidden="true"
-                            >
-                              <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
-                            </svg>
-                            <span className="sr-only"></span>
+                            <span className="flex items-center justify-center p-2 text-gray-500 rounded-lg transition duration-75   hover:bg-gray-100 bg-[#EAECF04D]">
+                              <BiCommentDetail className="text-xl text-[#D0D5DD]" />
+                            </span>
+                            <span className="text-[#D0D5DD] text-sm pt-1">
+                              Meetings
+                            </span>
                           </a>
-                          <div
-                            id="tooltip-users"
-                            role="tooltip"
-                            className="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip"
-                          >
-                            Users
-                            <div
-                              className="tooltip-arrow"
-                              data-popper-arrow
-                            ></div>
-                          </div>
                         </li>
-                        <li>
+                        <li className="flex flex-col items-center">
                           <a
                             href="#"
-                            data-tooltip-target="tooltip-media"
-                            data-tooltip-placement="left"
-                            className="flex items-center p-2 text-gray-500 rounded-lg transition duration-75  hover:text-gray-900  hover:bg-gray-100 "
+                            className="flex items-center flex-col justify-center "
                           >
-                            <svg
-                              className="h-6 w-6"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                              aria-hidden="true"
-                            >
-                              <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
-                            </svg>
-                            <span className="sr-only"></span>
+                            <span className="flex items-center justify-center p-2 text-gray-500 rounded-lg transition duration-75   hover:bg-gray-100 bg-[#EAECF04D]">
+                              <BiCommentDetail className="text-xl text-[#D0D5DD]" />
+                            </span>
+                            <span className="text-[#D0D5DD] text-sm pt-1">
+                              Docs
+                            </span>
                           </a>
-                          <div
-                            id="tooltip-media"
-                            role="tooltip"
-                            className="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip"
+                        </li>
+                        <li className="flex flex-col items-center">
+                          <a
+                            href="#"
+                            className="flex items-center flex-col justify-center "
                           >
-                            Media
-                            <div
-                              className="tooltip-arrow"
-                              data-popper-arrow
-                            ></div>
-                          </div>
+                            <span className="flex items-center justify-center p-2 text-gray-500 rounded-lg transition duration-75   hover:bg-gray-100 bg-[#EAECF04D]">
+                              <BiCommentDetail className="text-xl text-[#F79009]" />
+                            </span>
+                          </a>
                         </li>
                       </ul>
 
@@ -947,21 +837,9 @@ export default function Detail({ open, setOpen, detailData, token }) {
                             href="#"
                             data-tooltip-target="tooltip-new"
                             data-tooltip-placement="left"
-                            className="flex items-center p-2 text-gray-500 rounded-lg transition duration-75  hover:text-gray-900  hover:bg-gray-100 "
+                            className="flex items-center p-2 text-[#98A2B3] rounded-lg transition duration-75  hover:text-gray-900  hover:bg-gray-100 "
                           >
-                            <svg
-                              className="h-6 w-6"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                              aria-hidden="true"
-                            >
-                              <path
-                                clipRule="evenodd"
-                                fillRule="evenodd"
-                                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                              ></path>
-                            </svg>
+                            <GoPlus className="text-2xl" />
                             <span className="sr-only"></span>
                           </a>
                           <div
