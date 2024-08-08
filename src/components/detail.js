@@ -335,9 +335,9 @@ export default function Detail({ open, setOpen, detailData, token }) {
             transition
             className="relative transform  overflow-hidden rounded-lg bg-white  text-left shadow-xl transition-all 
             data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in
-             sm:my-8  w-3/4 min-h-full data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
+             sm:my-8  w-3/4 min-h-full data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95 "
           >
-            <div className="mt-3 grid grid-cols-12 max-h-[768px] box-border">
+            <div className="mt-3 grid grid-cols-12 max-h-[768px] overflow-y-auto box-border">
               <div className="col-span-12 py-5 border-b px-5 flex flex-row justify-between h-fit">
                 <nav
                   aria-label="Breadcrumb"
