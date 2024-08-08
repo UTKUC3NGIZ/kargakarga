@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Popover,
   PopoverButton,
@@ -174,19 +173,12 @@ export default function Home() {
               </button>
             ))}
           </span>
-          <Suspense fallback={<Loading />}>
-            {tabs.map(
-              (tab) =>
-                selectedTab === tab.key && (
-                  <Dnd
-                    key={tab.key}
-                    setOpen={setOpenModal}
-                    dndFilter={dndFilter}
-                    setDetailData={setDetailData}
-                  />
-                )
-            )}
-          </Suspense>
+
+          <Dnd
+            setOpen={setOpenModal}
+            dndFilter={dndFilter}
+            setDetailData={setDetailData}
+          />
         </main>
         <Detail
           open={openModal}
