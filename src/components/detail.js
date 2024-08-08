@@ -8,6 +8,10 @@ import {
   TabList,
   TabPanel,
   TabPanels,
+  Popover,
+  PopoverButton,
+  PopoverPanel,
+  PopoverGroup,
 } from "@headlessui/react";
 import {
   IoIosSearch,
@@ -17,7 +21,7 @@ import {
 } from "react-icons/io";
 import { IoFilterOutline, IoSendOutline } from "react-icons/io5";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import { CiShare1, CiStar } from "react-icons/ci";
+import { CiFilter, CiShare1, CiStar } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import { GoPaperclip } from "react-icons/go";
 import {
@@ -36,6 +40,7 @@ import {
   HomeIcon,
 } from "@heroicons/react/20/solid";
 import { LuCopy } from "react-icons/lu";
+import axios from "axios";
 
 const activity = [
   {
@@ -278,8 +283,7 @@ const pages = [
   { name: "Projects", href: "#", current: false },
   { name: "Project Nero", href: "#", current: true },
 ];
-
-export default function Detail({ open, setOpen, detailData }) {
+export default function Detail({ open, setOpen, detailData, token }) {
   const colorMap = {
     1: "text-[#C80B0B]",
     2: "text-[#F79009]",
@@ -287,8 +291,21 @@ export default function Detail({ open, setOpen, detailData }) {
     4: "text-[#2083D7]",
     5: "text-[#079455]",
   };
-  console.log(detailData);
   const flagColorClass = colorMap[detailData?.flag] || "text-black";
+  const deleteTask = (code) => {
+    axios.delete(
+      `https://api.management.parse25proje.link/api/tasks/${code}`,
+
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    window.location.reload();
+    setOpen(false);
+  };
+
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-[99]">
       <DialogBackdrop
@@ -353,9 +370,31 @@ export default function Detail({ open, setOpen, detailData }) {
                   </ol>
                 </nav>
                 <div className="flex gap-6 flex-row items-start h-fit">
-                  <button className="text-xl">
-                    <HiOutlineDotsHorizontal />
-                  </button>
+                  <PopoverGroup className="-mx-4 flex items-center divide-x divide-gray-200">
+                    <Popover className="relative inline-block px-4 text-left">
+                      <PopoverButton className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                        <span className="text-xl">
+                          <HiOutlineDotsHorizontal />
+                        </span>
+                      </PopoverButton>
+
+                      <PopoverPanel
+                        transition
+                        className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                      >
+                        <div className="flex justify-end">
+                          <button
+                            type="button"
+                            className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 outline-none"
+                            onClick={() => deleteTask(detailData.code)}
+                          >
+                            Sil
+                          </button>
+                        </div>
+                      </PopoverPanel>
+                    </Popover>
+                  </PopoverGroup>
+
                   <button className="text-xl">
                     <CiShare1 />
                   </button>

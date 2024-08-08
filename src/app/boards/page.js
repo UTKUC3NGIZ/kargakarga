@@ -959,6 +959,7 @@ export default function Home() {
             open={openModal}
             setOpen={setOpenModal}
             detailData={detailData}
+            token={token}
           />
         </main>
 
@@ -966,6 +967,7 @@ export default function Home() {
           open={openModal}
           setOpen={setOpenModal}
           detailData={detailData}
+          token={token}
         />
       </main>
     </Suspense>

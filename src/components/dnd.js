@@ -153,6 +153,7 @@ const Board = ({
           setOpen={setOpen}
           open={open}
           setDetailData={setDetailData}
+          code={col.code}
         />
       ))}
       <AddColumn addColumn={addColumn} />
@@ -169,6 +170,7 @@ const Column = ({
   id,
   setOpen,
   open,
+  code,
   setDetailData,
 }) => {
   const [active, setActive] = useState(false);
@@ -381,6 +383,7 @@ const Card = ({
   endDate,
   flags,
   flag,
+  code,
   setOpen,
   setDetailData,
 }) => {
@@ -409,6 +412,7 @@ const Card = ({
             startDate,
             endDate,
             flag,
+            code,
           });
         }}
         className="cursor-grab rounded h-auto border border-white-700 bg-white-800 p-3 active:cursor-grabbing shadow-sm"
