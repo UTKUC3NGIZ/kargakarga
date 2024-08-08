@@ -356,8 +356,27 @@ export default function Detail({ open, setOpen, detailData, token }) {
     }
   }, [detailData]);
 
-  const handleValueChange = (newValue) => {
-    setDates(newValue);
+  const handleDateChange = (newValue) => {
+    const formatDate = (date) => {
+      if (date) {
+        return new Date(date).toISOString().slice(0, 19);
+      }
+      return null;
+    };
+
+    const formattedStartDate = formatDate(newValue.startDate);
+    const formattedEndDate = formatDate(newValue.endDate);
+
+    setDates({
+      startDate: formattedStartDate,
+      endDate: formattedEndDate,
+    });
+
+    setEditData((prevData) => ({
+      ...prevData,
+      startDate: formattedStartDate,
+      endDate: formattedEndDate,
+    }));
   };
 
   const handleInputChange = (e) => {
@@ -498,7 +517,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
                     </button>
                   </div>
                   <div className="md:w-[260px] w-full pt-8 md:pt-0">
-                    <Datepicker value={dates} onChange={handleValueChange} />
+                    <Datepicker value={dates} onChange={handleDateChange} />
                   </div>
                 </div>
                 <div className="flex flex-row lg:gap-20 gap-10">
