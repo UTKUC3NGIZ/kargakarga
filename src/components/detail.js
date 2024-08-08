@@ -345,7 +345,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
     endDate: detailData?.endDate,
   });
   const [editData, setEditData] = useState({});
-
+  console.log(editData);
   useEffect(() => {
     if (detailData) {
       setDates({
@@ -488,7 +488,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
                         name="title"
                         value={editData?.title || ""}
                         onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded-md"
+                        className="w-full p-2  rounded-md outline-none"
                       />
                     </h2>
 
@@ -558,7 +558,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
                       name="description"
                       value={editData?.description || ""}
                       onChange={handleInputChange}
-                      className="w-full p-2 border border-gray-300 rounded-md"
+                      className="w-full p-2 brounded-md outline-none"
                     />
                   </p>
                   <button
