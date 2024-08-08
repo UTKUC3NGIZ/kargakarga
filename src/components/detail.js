@@ -559,37 +559,34 @@ export default function Detail({ open, setOpen, detailData, token }) {
                                             <img
                                               alt=""
                                               src={commentsItem.imageUrl}
-                                              className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400"
+                                              className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-white"
                                             />
 
-                                            <span className="absolute -bottom-0.5 -right-1 rounded-tl bg-white px-0.5 py-px">
-                                              <ChatBubbleLeftEllipsisIcon
-                                                aria-hidden="true"
-                                                className="h-5 w-5 text-gray-400"
-                                              />
-                                            </span>
+                                            <span className="absolute -bottom-0.5 -right-0 rounded-full   py-px bg-[#17B26A] w-3 h-3 ring-2 ring-white"></span>
                                           </div>
                                           <div className="min-w-0 flex-1">
-                                            <div className="flex flex-row gap-2 text-center items-center">
-                                              <div className="text-sm">
-                                                <a
-                                                  href={
-                                                    commentsItem.person.href
-                                                  }
-                                                  className="font-medium text-gray-900"
-                                                >
-                                                  {commentsItem.person.name}
-                                                </a>
+                                            <div className="flex flex-row gap-2 text-center items-center justify-between">
+                                              <div className="flex flex-row items-center gap-2">
+                                                <div className="text-sm">
+                                                  <a
+                                                    href={
+                                                      commentsItem.person.href
+                                                    }
+                                                    className="font-medium text-gray-900"
+                                                  >
+                                                    {commentsItem.person.name}
+                                                  </a>
+                                                </div>
+                                                <p className="mt-0.5 text-sm text-[#475467]">
+                                                  {commentsItem.date}
+                                                </p>
                                               </div>
-                                              <p className="mt-0.5 text-sm text-gray-500">
-                                                {commentsItem.date}
-                                              </p>
                                             </div>
-                                            <div className="mt-2 text-sm text-gray-700">
+                                            <div className=" text-sm text-gray-700">
                                               <p>{commentsItem.info}</p>
                                             </div>
                                             <div className="mt-2 text-sm text-gray-700 border px-2 py-3 rounded-tr-lg rounded-bl-lg">
-                                              <p>{commentsItem.comment}</p>
+                                              <p>"{commentsItem.comment}"</p>
                                             </div>
                                           </div>
                                         </div>
