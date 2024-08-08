@@ -514,21 +514,21 @@ export default function Detail({ open, setOpen, detailData, token }) {
                     >
                       <Tab
                         className={
-                          "flex flex-row gap-2 items-center md:text-lg sm:text-base text-sm font-normal text-[#98A2B3]  "
+                          "flex flex-row gap-2 items-center md:text-lg sm:text-base text-sm  text-[#98A2B3]  data-[selected]:text-[#145389]  data-[selected]:border-b-2 border-[#145389] font-bold"
                         }
                       >
                         <GoPaperclip /> Attachment
                       </Tab>
                       <Tab
                         className={
-                          "flex flex-row gap-2 items-center md:text-lg sm:text-base text-sm font-normal text-[#98A2B3] "
+                          "flex flex-row gap-2 items-center md:text-lg sm:text-base text-sm  text-[#98A2B3]  data-[selected]:text-[#145389]  data-[selected]:border-b-2 border-[#145389] font-bold"
                         }
                       >
                         <GoPaperclip /> Sub Task
                       </Tab>
                       <Tab
                         className={
-                          "flex flex-row gap-2 items-center md:text-lg sm:text-base text-sm font-normal text-[#98A2B3] "
+                          "flex flex-row gap-2 items-center md:text-lg sm:text-base text-sm  text-[#98A2B3]  data-[selected]:text-[#145389]  data-[selected]:border-b-2 border-[#145389] font-bold"
                         }
                       >
                         <GoPaperclip /> Comment
