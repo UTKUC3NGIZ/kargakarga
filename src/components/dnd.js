@@ -8,6 +8,7 @@ import { FaFlag } from "react-icons/fa";
 import { LuDiamond } from "react-icons/lu";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { GoPlus } from "react-icons/go";
 
 let token = null;
 
@@ -308,7 +309,7 @@ const Column = ({
   const filteredCards = cards.filter((c) => c.column === column);
 
   return (
-    <div className="w-80 shrink-0 border rounded-t-lg rounded-b-lg bg-white px-1">
+    <div className="w-96 shrink-0 border rounded-t-lg rounded-b-lg bg-white px-1">
       <div className="flex items-center justify-between px-4 pb-3 pt-4 mb-1 border-b shadow-sm">
         <div className="flex flex-row gap-2 text-center justify-center items-center ">
           <h3 className={`text-[#4E5BA6] text-base font-normal`}>{title}</h3>
@@ -418,7 +419,35 @@ const Card = ({
         className="cursor-grab rounded h-auto border border-white-700 bg-white-800 p-3 active:cursor-grabbing shadow-sm"
       >
         <h2 className="text-orange-500">{title}</h2>
-        <p className="text-sm text-[#475467]">{description}</p>
+        <div className="grid grid-cols-12 flex-row justify-between">
+          <p className="text-sm text-[#475467] col-span-8">{description}</p>
+          <span className="text-black font-medium text-md flex flex-row gap-2 col-span-4">
+            <div className="flex -space-x-2 overflow-hidden">
+              <img
+                alt=""
+                src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
+              />
+              <img
+                alt=""
+                src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
+              />
+              <img
+                alt=""
+                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+                className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
+              />
+              <div className="flex justify-center items-center h-6 w-6 rounded-full ring-2 ring-white text-[#475467] bg-gray-200 font-bold text-sm">
+                <span>+5</span>
+              </div>
+            </div>
+            <button className="flex justify-center items-center h-6 w-6 rounded-full text-[#475467] bg-transparent border border-gray-300 font-bold border-dashed ">
+              <GoPlus />
+            </button>
+          </span>
+        </div>
+
         <div className="text-[#98A2B3] flex flex-row items-center py-3 text-xs gap-1">
           <MdOutlineDateRange />
           <span>
