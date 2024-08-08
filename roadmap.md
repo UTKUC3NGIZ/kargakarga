@@ -65,6 +65,5 @@ https://tailwindui.com/components/application-ui/overlays/modal-dialogs
 
 - Put ile data düzenleme
 - font size düzenleme
-- bazı bileşenleri componentlere ayırma
 - renk kodlarını tanımlama
 - vercel derleme hatası

@@ -1,10 +1,5 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
 import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
   Popover,
   PopoverButton,
   PopoverGroup,
@@ -12,7 +7,6 @@ import {
 } from "@headlessui/react";
 import Header from "@/components/header.js";
 import LeftBar from "@/components/leftBar";
-import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import Dnd from "@/components/dnd.js";
 import { useEffect, useState, Suspense } from "react";
 import toast from "react-hot-toast";
