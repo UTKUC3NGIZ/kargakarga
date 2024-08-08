@@ -330,14 +330,14 @@ export default function Detail({ open, setOpen, detailData, token }) {
       />
 
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+        <div className="flex min-h-full md:items-end items-center justify-center p-4 text-center sm:items-center sm:p-0">
           <DialogPanel
             transition
             className="relative transform  overflow-hidden rounded-lg bg-white  text-left shadow-xl transition-all 
             data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in
-             sm:my-8  w-3/4 min-h-full data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95 "
+             sm:my-8  xl:w-10/12 w-full min-h-full data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95 "
           >
-            <div className="mt-3 grid grid-cols-12 max-h-[768px] overflow-y-auto box-border">
+            <div className="mt-3 grid grid-cols-12 max-h-[768px] overflow-y-auto box-border overflow-x-hidden">
               <div className="col-span-12 py-5 border-b px-5 flex flex-row justify-between h-fit">
                 <nav
                   aria-label="Breadcrumb"
@@ -351,7 +351,10 @@ export default function Detail({ open, setOpen, detailData, token }) {
                       <IoIosArrowDown />
                     </button>
                   </div>
-                  <ol role="list" className="flex items-center space-x-4">
+                  <ol
+                    role="list"
+                    className="md:flex hidden items-center space-x-4"
+                  >
                     <li className="pr-3">
                       <a
                         href="#"
@@ -425,34 +428,30 @@ export default function Detail({ open, setOpen, detailData, token }) {
                   </button>
                 </div>
               </div>
-              <div className="col-span-8 p-12 pt-8 flex flex-col gap-3">
-                <div className="flex flex-row justify-between pb-9">
-                  <div className="grid grid-cols-12 w-1/2 pt-10 items-center">
-                    <button>
+              <div className="lg:col-span-8 col-span-12 sm:p-8 p-4 pt-8 flex flex-col lg:gap-3 gap-5">
+                <div className="flex md:flex-row flex-col justify-between pb-9">
+                  <div className="grid grid-cols-12 md:w-1/2 pt-10 items-center">
+                    <button className="">
                       <div className="bg-[#8D99AE] rounded-full w-7 h-7 flex justify-center items-center border-2">
                         <span className="w-4 h-4 bg-[#8D99AE] border rounded-full block col-span-1 ring-2 ring-white"></span>
                       </div>
                     </button>
-                    <h2 className="text-2xl font-bold text-[#475467] col-span-11">
+                    <h2 className="sm:text-2xl text-lg font-bold text-[#475467] col-span-11">
                       {detailData?.title}
                     </h2>
 
-                    <button className="col-span-12 pt-3 text-base font-medium text-[#98A2B3] flex flex-row items-center gap-2">
+                    <button className="col-span-12 pt-3 text-base font-medium text-[#98A2B3] flex flex-row items-center gap-2 pl-10 md:pl-0">
                       ID: <span className="underline">#{detailData?.id}</span>
                       <LuCopy />
                     </button>
                   </div>
-                  <div className="w-[260px]">
-                    <Datepicker
-                      value={dates}
-                      onChange={handleValueChange}
-                      showShortcuts={true}
-                    />
+                  <div className="md:w-[260px] w-full pt-8 md:pt-0">
+                    <Datepicker value={dates} onChange={handleValueChange} />
                   </div>
                 </div>
-                <div className="flex flex-row gap-20">
+                <div className="flex flex-row lg:gap-20 gap-10">
                   <div>
-                    <h2 className="uppercase text-md font-medium text-[#475467] pb-3">
+                    <h2 className="uppercase sm:text-md text-sm font-medium text-[#475467] pb-3">
                       Task Status
                     </h2>
                     <span className="text-black font-medium text-md capitalize">
@@ -460,7 +459,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
                     </span>
                   </div>
                   <div>
-                    <h2 className="uppercase text-md font-medium text-[#475467] pb-3">
+                    <h2 className="uppercase sm:text-md text-sm font-medium text-[#475467] pb-3">
                       Assingment
                     </h2>
                     <span className="text-black font-medium text-md flex flex-row gap-2">
@@ -490,7 +489,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
                     </span>
                   </div>
                   <div>
-                    <h2 className="uppercase text-md font-medium text-[#475467] pb-3">
+                    <h2 className="uppercase sm:text-md text-sm font-medium text-[#475467] pb-3">
                       Priotry
                     </h2>
                     <span className={`text-md ${flagColorClass}`}>
@@ -499,7 +498,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
                   </div>
                 </div>
                 <div>
-                  <h2 className="uppercase text-md font-medium text-[#475467] pb-3">
+                  <h2 className="uppercase sm:text-md text-sm font-medium text-[#475467] pb-3">
                     Description
                   </h2>
                   <p className="text-sm font-normal text-[#475467]">
@@ -510,26 +509,26 @@ export default function Detail({ open, setOpen, detailData, token }) {
                   <TabGroup>
                     <TabList
                       className={
-                        "border pt-3 pb-2 flex justify-center gap-28 border-t rounded-t-lg bg-[#F9FAFB]"
+                        "border pt-3 pb-2 flex sm:justify-center justify-between md:px-0 px-2 lg:gap-28 md:gap-14 sm:gap-8 gap-4 border-t rounded-t-lg bg-[#F9FAFB]"
                       }
                     >
                       <Tab
                         className={
-                          "flex flex-row gap-2 items-center text-lg font-normal text-[#98A2B3]  "
+                          "flex flex-row gap-2 items-center md:text-lg sm:text-base text-sm font-normal text-[#98A2B3]  "
                         }
                       >
                         <GoPaperclip /> Attachment
                       </Tab>
                       <Tab
                         className={
-                          "flex flex-row gap-2 items-center text-lg font-normal text-[#98A2B3] "
+                          "flex flex-row gap-2 items-center md:text-lg sm:text-base text-sm font-normal text-[#98A2B3] "
                         }
                       >
                         <GoPaperclip /> Sub Task
                       </Tab>
                       <Tab
                         className={
-                          "flex flex-row gap-2 items-center text-lg font-normal text-[#98A2B3] "
+                          "flex flex-row gap-2 items-center md:text-lg sm:text-base text-sm font-normal text-[#98A2B3] "
                         }
                       >
                         <GoPaperclip /> Comment
@@ -611,12 +610,12 @@ export default function Detail({ open, setOpen, detailData, token }) {
                                       required
                                     ></textarea>
                                   </div>
-                                  <div className="flex justify-between items-center px-3 pb-2 bg-[#F9FAFB]">
+                                  <div className="flex justify-between items-center sm:px-3 px-2 pb-2 bg-[#F9FAFB]">
                                     <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x ">
                                       <div className="flex items-center space-x-1 sm:pr-4">
                                         <button
                                           type="button"
-                                          className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+                                          className="sm:p-2 p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
                                         >
                                           <svg
                                             className="w-4 h-4"
@@ -638,49 +637,49 @@ export default function Detail({ open, setOpen, detailData, token }) {
                                         </button>
                                         <button
                                           type="button"
-                                          className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+                                          className="sm:p-2 p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
                                         >
                                           <FaItalic />
                                         </button>
                                         <button
                                           type="button"
-                                          className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+                                          className="sm:p-2 p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
                                         >
                                           <FaHeading />
                                         </button>
                                         <button
                                           type="button"
-                                          className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+                                          className="sm:p-2 p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
                                         >
                                           <FaHeading className="text-sm" />
                                         </button>
                                         <button
                                           type="button"
-                                          className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+                                          className="sm:p-2 p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
                                         >
                                           <PiQuotesFill />
                                         </button>
                                         <button
                                           type="button"
-                                          className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+                                          className="sm:p-2 p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
                                         >
                                           <IoMdLink />
                                         </button>
                                         <button
                                           type="button"
-                                          className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+                                          className="sm:p-2 p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
                                         >
                                           <FaImage />
                                         </button>
                                         <button
                                           type="button"
-                                          className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+                                          className="sm:p-2 p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
                                         >
                                           <FaListUl />
                                         </button>
                                         <button
                                           type="button"
-                                          className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+                                          className="sm:p-2 p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
                                         >
                                           <FaListOl />
                                         </button>
@@ -703,7 +702,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
                   </TabGroup>
                 </div>
               </div>
-              <div className="grid col-span-4 grid-cols-12 ">
+              <div className="lg:grid hidden col-span-4 grid-cols-12 ">
                 <div className="col-span-10 flex flex-col gap-4 border border-t-0  overflow-y-auto bg-[#F3F6FD]">
                   <div className="flex flex-row justify-between p-4 border-b bg-white">
                     <h2 className="text-[#145389] text-base font-semibold">
