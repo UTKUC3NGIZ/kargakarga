@@ -297,6 +297,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
     5: "text-[#079455]",
   };
   const flagColorClass = colorMap[detailData?.flag] || "text-black";
+
   const deleteTask = async (code) => {
     try {
       await axios.delete(
@@ -313,7 +314,8 @@ export default function Detail({ open, setOpen, detailData, token }) {
       console.error("Error deleting task:", error);
     }
   };
-  const editTask = async (code) => {
+
+  const editTask = async () => {
     try {
       await axios.put(
         `https://api.management.parse25proje.link/api/tasks/${editData?.code}`,
@@ -334,7 +336,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
       window.location.reload();
       setOpen(false);
     } catch (error) {
-      console.error("Error deleting task:", error);
+      console.error("Error editing task:", error);
     }
   };
 
@@ -343,7 +345,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
     endDate: detailData?.endDate,
   });
   const [editData, setEditData] = useState({});
-  console.log(editData);
+
   useEffect(() => {
     if (detailData) {
       setDates({
@@ -357,6 +359,15 @@ export default function Detail({ open, setOpen, detailData, token }) {
   const handleValueChange = (newValue) => {
     setDates(newValue);
   };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-[99]">
       <DialogBackdrop
@@ -472,7 +483,13 @@ export default function Detail({ open, setOpen, detailData, token }) {
                       </div>
                     </button>
                     <h2 className="sm:text-2xl text-lg font-bold text-[#475467] col-span-11">
-                      {detailData?.title}
+                      <input
+                        type="text"
+                        name="title"
+                        value={editData?.title || ""}
+                        onChange={handleInputChange}
+                        className="w-full p-2 border border-gray-300 rounded-md"
+                      />
                     </h2>
 
                     <button className="col-span-12 pt-3 text-base font-medium text-[#98A2B3] flex flex-row items-center gap-2 pl-10 md:pl-0">
@@ -537,8 +554,19 @@ export default function Detail({ open, setOpen, detailData, token }) {
                     Description
                   </h2>
                   <p className="text-sm font-normal text-[#475467]">
-                    {detailData?.description}
+                    <textarea
+                      name="description"
+                      value={editData?.description || ""}
+                      onChange={handleInputChange}
+                      className="w-full p-2 border border-gray-300 rounded-md"
+                    />
                   </p>
+                  <button
+                    onClick={editTask}
+                    className="mt-4 p-2 bg-blue-500 text-white rounded-md"
+                  >
+                    Save Changes
+                  </button>
                 </div>
                 <div>
                   <TabGroup>
