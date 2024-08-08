@@ -43,6 +43,8 @@ import {
 } from "@heroicons/react/20/solid";
 import { LuCopy } from "react-icons/lu";
 import axios from "axios";
+import Datepicker from "react-tailwindcss-datepicker";
+import { useState } from "react";
 
 const activity = [
   {
@@ -308,6 +310,15 @@ export default function Detail({ open, setOpen, detailData, token }) {
     window.location.reload();
     setOpen(false);
   };
+  const [dates, setDates] = useState({
+    startDate: null,
+    endDate: null,
+  });
+
+  const handleValueChange = (newValue) => {
+    console.log("newValue:", newValue);
+    setDates(newValue);
+  };
 
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-[99]">
@@ -429,7 +440,13 @@ export default function Detail({ open, setOpen, detailData, token }) {
                       <LuCopy />
                     </button>
                   </div>
-                  <div>Date Picker</div>
+                  <div>
+                    <Datepicker
+                      value={dates}
+                      onChange={handleValueChange}
+                      showShortcuts={true}
+                    />
+                  </div>
                 </div>
                 <div className="flex flex-row gap-20">
                   <div>
