@@ -297,19 +297,23 @@ export default function Detail({ open, setOpen, detailData, token }) {
     5: "text-[#079455]",
   };
   const flagColorClass = colorMap[detailData?.flag] || "text-black";
-  const deleteTask = (code) => {
-    axios.delete(
-      `https://api.management.parse25proje.link/api/tasks/${code}`,
-
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    window.location.reload();
-    setOpen(false);
+  const deleteTask = async (code) => {
+    try {
+      await axios.delete(
+        `https://api.management.parse25proje.link/api/tasks/${code}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      window.location.reload();
+      setOpen(false);
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
   };
+
   const [dates, setDates] = useState({
     startDate: detailData?.startDate,
     endDate: detailData?.endDate,
@@ -333,7 +337,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
             data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in
              sm:my-8  w-3/4 min-h-full data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
           >
-            <div className="mt-3 grid grid-cols-12 max-h-[768px] overflow-y-auto box-border">
+            <div className="mt-3 grid grid-cols-12 max-h-[768px] box-border">
               <div className="col-span-12 py-5 border-b px-5 flex flex-row justify-between h-fit">
                 <nav
                   aria-label="Breadcrumb"
@@ -719,7 +723,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
                   </div>
                   <ul
                     role="list"
-                    className="-mb-8 p-3 max-h-[768px] bg-[#F3F6FD]"
+                    className="-mb-8 p-3 max-h-[650px] bg-[#F3F6FD]"
                   >
                     {activity.map((activityItem, activityItemIdx) => (
                       <li key={activityItem.id}>
