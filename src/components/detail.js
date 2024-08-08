@@ -356,7 +356,6 @@ export default function Detail({ open, setOpen, detailData, token }) {
     endDate: detailData?.endDate,
   });
   const [editData, setEditData] = useState({});
-  console.log(editData);
   const [selected, setSelected] = useState(buttonData[0]);
   useEffect(() => {
     if (detailData) {
@@ -365,6 +364,13 @@ export default function Detail({ open, setOpen, detailData, token }) {
         endDate: detailData.endDate,
       });
       setEditData(detailData);
+
+      const selectedFlag = buttonData.find(
+        (button) => button.id === detailData.flag?.toString()
+      );
+      if (selectedFlag) {
+        setSelected(selectedFlag);
+      }
     }
   }, [detailData]);
 
