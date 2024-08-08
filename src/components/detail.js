@@ -540,7 +540,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
                                             <img
                                               alt=""
                                               src={commentsItem.imageUrl}
-                                              className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white"
+                                              className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400"
                                             />
 
                                             <span className="absolute -bottom-0.5 -right-1 rounded-tl bg-white px-0.5 py-px">
@@ -688,20 +688,24 @@ export default function Detail({ open, setOpen, detailData, token }) {
                 </div>
               </div>
               <div className="grid col-span-4 grid-cols-12 ">
-                <div className="col-span-10 flex flex-col gap-4 border border-t-0  overflow-y-auto">
-                  <div className="flex flex-row justify-between p-4 border-b">
-                    <h2>Activity</h2>
+                <div className="col-span-10 flex flex-col gap-4 border border-t-0  overflow-y-auto bg-[#F3F6FD]">
+                  <div className="flex flex-row justify-between p-4 border-b bg-white">
+                    <h2 className="text-[#145389] text-base font-semibold">
+                      Activity
+                    </h2>
                     <div className="flex flex-row gap-4">
-                      <button className="text-xl">
-                        <IoFilterOutline />
-                      </button>
-
-                      <button className="text-xl">
+                      <button className="text-2xl text-[#98A2B3]">
                         <IoIosSearch />
+                      </button>
+                      <button className="text-2xl text-[#98A2B3]">
+                        <IoFilterOutline />
                       </button>
                     </div>
                   </div>
-                  <ul role="list" className="-mb-8 p-3 max-h-[768px]">
+                  <ul
+                    role="list"
+                    className="-mb-8 p-3 max-h-[768px] bg-[#F3F6FD]"
+                  >
                     {activity.map((activityItem, activityItemIdx) => (
                       <li key={activityItem.id}>
                         <div className="relative pb-8">
@@ -716,31 +720,29 @@ export default function Detail({ open, setOpen, detailData, token }) {
                               <img
                                 alt=""
                                 src={activityItem.imageUrl}
-                                className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white"
+                                className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-white"
                               />
 
-                              <span className="absolute -bottom-0.5 -right-1 rounded-tl bg-white px-0.5 py-px">
-                                <ChatBubbleLeftEllipsisIcon
-                                  aria-hidden="true"
-                                  className="h-5 w-5 text-gray-400"
-                                />
-                              </span>
+                              <span className="absolute -bottom-0.5 -right-0 rounded-full   py-px bg-[#17B26A] w-3 h-3 ring-2 ring-white"></span>
                             </div>
                             <div className="min-w-0 flex-1">
-                              <div className="flex flex-row gap-2 text-center items-center">
-                                <div className="text-sm">
-                                  <a
-                                    href={activityItem.person.href}
-                                    className="font-medium text-gray-900"
-                                  >
-                                    {activityItem.person.name}
-                                  </a>
+                              <div className="flex flex-row gap-2 text-center items-center justify-between">
+                                <div className="flex flex-row items-center gap-2">
+                                  <div className="text-sm">
+                                    <a
+                                      href={activityItem.person.href}
+                                      className="font-medium text-gray-900"
+                                    >
+                                      {activityItem.person.name}
+                                    </a>
+                                  </div>
+                                  <p className="mt-0.5 text-sm text-[#475467]">
+                                    {activityItem.date}
+                                  </p>
                                 </div>
-                                <p className="mt-0.5 text-sm text-gray-500">
-                                  {activityItem.date}
-                                </p>
+                                <span className=" rounded-full bg-[#17B26A] w-3 h-3 "></span>
                               </div>
-                              <div className="mt-2 text-sm text-gray-700">
+                              <div className=" text-sm text-gray-700">
                                 <p>{activityItem.comment}</p>
                               </div>
                             </div>
