@@ -63,7 +63,6 @@ https://tailwindui.com/components/application-ui/overlays/modal-dialogs
 
 <!-- Yapılacaklar -->
 
-- boardların içindeki avatarlar
 - Put ile data düzenleme
 - font size düzenleme
 - bazı bileşenleri componentlere ayırma
