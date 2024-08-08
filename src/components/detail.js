@@ -345,7 +345,6 @@ export default function Detail({ open, setOpen, detailData, token }) {
     endDate: detailData?.endDate,
   });
   const [editData, setEditData] = useState({});
-  console.log(editData);
   useEffect(() => {
     if (detailData) {
       setDates({
@@ -388,7 +387,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
   };
 
   return (
-    <Dialog open={open} onClose={setOpen} className="relative z-[99]">
+    <Dialog open={open} onClose={editTask} className="relative z-[99]">
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
@@ -488,7 +487,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
                   <button className="text-xl">
                     <CiStar />
                   </button>
-                  <button className="text-xl" onClick={() => setOpen(false)}>
+                  <button className="text-xl" onClick={() => editTask()}>
                     <RxCross1 />
                   </button>
                 </div>
@@ -580,12 +579,6 @@ export default function Detail({ open, setOpen, detailData, token }) {
                       className="w-full p-2 brounded-md outline-none"
                     />
                   </p>
-                  <button
-                    onClick={editTask}
-                    className="mt-4 p-2 bg-blue-500 text-white rounded-md"
-                  >
-                    Save Changes
-                  </button>
                 </div>
                 <div>
                   <TabGroup>
