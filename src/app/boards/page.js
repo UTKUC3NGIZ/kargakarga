@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Popover,
   PopoverButton,
@@ -16,16 +17,6 @@ import Detail from "@/components/detail.js";
 import { CiFilter } from "react-icons/ci";
 import {} from "@headlessui/react";
 import { FaFlag } from "react-icons/fa";
-
-const tabs = [
-  { key: "boards", label: "Boards" },
-  { key: "list", label: "List" },
-  { key: "other", label: "Other" },
-  { key: "other1", label: "Other" },
-  { key: "other2", label: "Other" },
-  { key: "other3", label: "Other" },
-  { key: "other4", label: "Other" },
-];
 
 const filter = {
   id: "sizes",
@@ -53,6 +44,17 @@ export default function Home() {
       return acc;
     }, {})
   );
+
+  const tabs = [
+    { key: "boards", label: "Boards" },
+    { key: "list", label: "List" },
+    { key: "other", label: "Other" },
+    { key: "other1", label: "Other" },
+    { key: "other2", label: "Other" },
+    { key: "other3", label: "Other" },
+    { key: "other4", label: "Other" },
+  ];
+
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
     setDndFilter((prevCheckedOptions) => ({
