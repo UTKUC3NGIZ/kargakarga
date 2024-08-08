@@ -311,12 +311,10 @@ export default function Detail({ open, setOpen, detailData, token }) {
     setOpen(false);
   };
   const [dates, setDates] = useState({
-    startDate: null,
-    endDate: null,
+    startDate: detailData?.startDate,
+    endDate: detailData?.endDate,
   });
-
   const handleValueChange = (newValue) => {
-    console.log("newValue:", newValue);
     setDates(newValue);
   };
 
@@ -440,7 +438,7 @@ export default function Detail({ open, setOpen, detailData, token }) {
                       <LuCopy />
                     </button>
                   </div>
-                  <div>
+                  <div className="w-[260px]">
                     <Datepicker
                       value={dates}
                       onChange={handleValueChange}
