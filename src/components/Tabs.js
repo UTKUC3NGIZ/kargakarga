@@ -2,35 +2,46 @@
 import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const filter = {
-  id: "sizes",
-  name: "Sizes",
-  options: [
-    { value: "1", color: "text-[#C80B0B]", checked: false },
-    { value: "2", color: "text-[#F79009]", checked: false },
-    { value: "3", color: "text-[#B3B8DB]", checked: false },
-    { value: "4", color: "text-[#2083D7]", checked: false },
-    { value: "5", color: "text-[#079455]", checked: false },
-  ],
-};
+const tabs = [
+  { key: "boards", label: "Boards" },
+  { key: "list", label: "List" },
+  { key: "other", label: "Other" },
+  { key: "other1", label: "Other" },
+  { key: "other2", label: "Other" },
+  { key: "other3", label: "Other" },
+  { key: "other4", label: "Other" },
+];
 
 function Tabs() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const handleCheckboxChange = (event) => {
-    const { value, checked } = event.target;
-    setDndFilter((prevCheckedOptions) => ({
-      ...prevCheckedOptions,
-      [value]: checked,
-    }));
-  };
+
   const selectedTab = searchParams.get("tab") || "boards";
 
   const handleTabChange = (tab) => {
     router.push(`/boards?tab=${tab}`);
   };
 
-  return <div>Tabs</div>;
+  return (
+    <span className="isolate !m-0 inline-flex rounded-md shadow-sm">
+      {tabs.map((tab) => (
+        <button
+          key={tab.key}
+          type="button"
+          className={`relative inline-flex items-center px-4 py-3 text-sm font-semibold ${
+            selectedTab === tab.key
+              ? "bg-gray-50 text-[#145389]"
+              : "bg-white text-gray-800"
+          } ring-1 ring-inset ring-gray-300 ${
+            tab.key === "boards" ? "rounded-l-md" : ""
+          } ${tab.key === "other4" ? "rounded-r-md" : ""}`}
+          onClick={() => handleTabChange(tab.key)}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </span>
+  );
 }
 
 export default Tabs;
