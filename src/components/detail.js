@@ -313,13 +313,37 @@ export default function Detail({ open, setOpen, detailData, token }) {
       console.error("Error deleting task:", error);
     }
   };
+  const editTask = async (code) => {
+    try {
+      await axios.put(
+        `https://api.management.parse25proje.link/api/tasks/${editData?.code}`,
+        {
+          name: editData?.title,
+          description: editData?.description,
+          boardId: editData?.board,
+          flagId: editData?.flag,
+          startDate: editData?.startDate,
+          endDate: editData?.endDate,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      window.location.reload();
+      setOpen(false);
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
 
   const [dates, setDates] = useState({
     startDate: detailData?.startDate,
     endDate: detailData?.endDate,
   });
   const [editData, setEditData] = useState({});
-
+  console.log(editData);
   useEffect(() => {
     if (detailData) {
       setDates({
@@ -333,7 +357,6 @@ export default function Detail({ open, setOpen, detailData, token }) {
   const handleValueChange = (newValue) => {
     setDates(newValue);
   };
-  console.log(editData);
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-[99]">
       <DialogBackdrop
