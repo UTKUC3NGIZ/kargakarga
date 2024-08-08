@@ -38,6 +38,7 @@ import { BiCommentDetail } from "react-icons/bi";
 
 import {
   ChatBubbleLeftEllipsisIcon,
+  CheckCircleIcon,
   ChevronRightIcon,
   HomeIcon,
 } from "@heroicons/react/20/solid";
@@ -45,6 +46,7 @@ import { LuCopy } from "react-icons/lu";
 import axios from "axios";
 import Datepicker from "react-tailwindcss-datepicker";
 import { useEffect, useState } from "react";
+import { Radio, RadioGroup } from "@headlessui/react";
 
 const activity = [
   {
@@ -288,6 +290,15 @@ const pages = [
   { name: "Projects", href: "#", current: false },
   { name: "Frontend Case", href: "#", current: true },
 ];
+
+const buttonData = [
+  { id: "1", color: "text-[#C80B0B]" },
+  { id: "2", color: "text-[#F79009]" },
+  { id: "3", color: "text-[#B3B8DB]" },
+  { id: "4", color: "text-[#2083D7]" },
+  { id: "5", color: "text-[#079455]" },
+];
+
 export default function Detail({ open, setOpen, detailData, token }) {
   const colorMap = {
     1: "text-[#C80B0B]",
@@ -345,6 +356,8 @@ export default function Detail({ open, setOpen, detailData, token }) {
     endDate: detailData?.endDate,
   });
   const [editData, setEditData] = useState({});
+  console.log(editData);
+  const [selected, setSelected] = useState(buttonData[0]);
   useEffect(() => {
     if (detailData) {
       setDates({
@@ -384,6 +397,17 @@ export default function Detail({ open, setOpen, detailData, token }) {
       ...prevData,
       [name]: value,
     }));
+  };
+
+  const handleRadioChange = (value) => {
+    const selectedFlag = buttonData.find((button) => button.id === value);
+    if (selectedFlag) {
+      setSelected(selectedFlag);
+      setEditData((prevData) => ({
+        ...prevData,
+        flag: Number(value),
+      }));
+    }
   };
 
   return (
@@ -563,7 +587,49 @@ export default function Detail({ open, setOpen, detailData, token }) {
                       Priotry
                     </h2>
                     <span className={`text-md ${flagColorClass}`}>
-                      <FaFlag />
+                      <PopoverGroup className="-mx-4 flex items-center divide-x divide-gray-200">
+                        <Popover className="relative inline-block px-4 text-left">
+                          <PopoverButton className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                            <span className="text-xl">
+                              <FaFlag
+                                className={`text-md ${
+                                  colorMap[selected?.id] || "text-black"
+                                }`}
+                              />
+                            </span>
+                          </PopoverButton>
+
+                          <PopoverPanel
+                            transition
+                            className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                          >
+                            <RadioGroup
+                              value={selected?.id}
+                              onChange={handleRadioChange}
+                              aria-label="Flag selection"
+                              className="space-y-2"
+                            >
+                              {buttonData.map((flag) => (
+                                <Radio
+                                  key={flag.id}
+                                  value={flag.id}
+                                  className="group relative flex cursor-pointer rounded-lg bg-white/5 py-4 px-5 text-white shadow-md transition focus:outline-none data-[focus]:outline-1 data-[focus]:outline-white data-[checked]:bg-white/10"
+                                >
+                                  <div className="flex w-full items-center justify-between">
+                                    <div className="text-sm/6">
+                                      <div className="flex gap-2 text-white/50">
+                                        <FaFlag
+                                          className={`text-md ${flag.color}`}
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </Radio>
+                              ))}
+                            </RadioGroup>
+                          </PopoverPanel>
+                        </Popover>
+                      </PopoverGroup>
                     </span>
                   </div>
                 </div>
