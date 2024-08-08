@@ -585,7 +585,10 @@ export default function Detail({ open, setOpen, detailData, token }) {
                                               <p>{commentsItem.info}</p>
                                             </div>
                                             <div className="mt-2 text-sm text-gray-700 border px-2 py-3 rounded-tr-lg rounded-bl-lg">
-                                              <p>"{commentsItem.comment}"</p>
+                                              <p>
+                                                &quot;{commentsItem.comment}
+                                                &quot;
+                                              </p>
                                             </div>
                                           </div>
                                         </div>
