@@ -44,7 +44,7 @@ import {
 import { LuCopy } from "react-icons/lu";
 import axios from "axios";
 import Datepicker from "react-tailwindcss-datepicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const activity = [
   {
@@ -318,10 +318,22 @@ export default function Detail({ open, setOpen, detailData, token }) {
     startDate: detailData?.startDate,
     endDate: detailData?.endDate,
   });
+  const [editData, setEditData] = useState({});
+
+  useEffect(() => {
+    if (detailData) {
+      setDates({
+        startDate: detailData.startDate,
+        endDate: detailData.endDate,
+      });
+      setEditData(detailData);
+    }
+  }, [detailData]);
+
   const handleValueChange = (newValue) => {
     setDates(newValue);
   };
-
+  console.log(editData);
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-[99]">
       <DialogBackdrop
