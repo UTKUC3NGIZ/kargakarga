@@ -41,6 +41,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { LuCopy } from "react-icons/lu";
 import axios from "axios";
+import { useState } from "react";
 
 const activity = [
   {
@@ -306,6 +307,21 @@ export default function Detail({ open, setOpen, detailData, token }) {
     setOpen(false);
   };
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [title, setTitle] = useState("tet");
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleBlur = () => {
+    setIsEditing(false);
+  };
+
+  const handleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-[99]">
       <DialogBackdrop
@@ -414,9 +430,25 @@ export default function Detail({ open, setOpen, detailData, token }) {
                         <span className="w-4 h-4 bg-[#8D99AE] border rounded-full block col-span-1 ring-2 ring-white"></span>
                       </div>
                     </button>
-                    <h2 className="text-2xl font-bold text-[#475467] col-span-11">
-                      {detailData?.title}
-                    </h2>
+                    <div className="col-span-11">
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          value={title}
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          className="text-2xl font-bold text-[#475467] w-full"
+                          autoFocus
+                        />
+                      ) : (
+                        <h2
+                          className="text-2xl font-bold text-[#475467] cursor-pointer"
+                          onClick={handleEditClick}
+                        >
+                          {title}
+                        </h2>
+                      )}
+                    </div>
 
                     <button className="col-span-12 pt-3 text-base font-medium text-[#98A2B3] flex flex-row items-center gap-2">
                       ID: <span className="underline">#{detailData?.id}</span>
