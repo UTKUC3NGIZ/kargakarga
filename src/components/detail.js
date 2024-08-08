@@ -316,7 +316,9 @@ export default function Detail({ open, setOpen, detailData, token }) {
       console.error("Error deleting task:", error);
     }
   };
-
+  const areObjectsEqual = (obj1, obj2) => {
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
+  };
   const editTask = async () => {
     try {
       await axios.put(
@@ -335,10 +337,13 @@ export default function Detail({ open, setOpen, detailData, token }) {
           },
         }
       );
-      window.location.reload();
+      if (!areObjectsEqual(detailData, editData)) {
+        window.location.reload();
+      }
       setOpen(false);
     } catch (error) {
       console.error("Error editing task:", error);
+      setOpen(false);
     }
   };
 
